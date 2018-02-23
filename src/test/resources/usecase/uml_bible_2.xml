@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<experiment_case>
+    <case_name>UML Bible Model 2</case_name>
+    <normalize>true</normalize>
+    <source>
+        <rumbling expected="gc">executive venue manager</rumbling>
+        <rumbling expected="gc">venue manager</rumbling>
+        <rumbling expected="vc">venue manager generalizes executive venue manager</rumbling>
+        <rumbling expected="vc">venue manager cancel event</rumbling>
+        <rumbling expected="vc">venue manager cancel performance</rumbling>
+        <rumbling expected="vc">executive venue manager cancel event</rumbling>
+        <rumbling expected="vc">executive venue manager cancel performance</rumbling>
+        <rumbling expected="vc">executive venue manager reschedule performance</rumbling>
+        <rumbling expected="vc">executive venue manager reschedule event</rumbling>
+        <rumbling expected="vc">event moved to new data range</rumbling>
+        <rumbling expected="vc">end date set earlier</rumbling>
+        <rumbling expected="br">It is obligatory that venue manager cancel performance if venue manager cancel event</rumbling>
+        <rumbling expected="br">It is obligatory that executive venue manager cancel performance if executive venue manager cancel event</rumbling>
+        <rumbling expected="br">It is possible that executive venue manager reschedule performance if venue manager cancel performance and event moved to new data range</rumbling>
+        <rumbling expected="br">It is possible that executive venue manager reschedule performance if venue manager cancel performance and end date set earlier</rumbling>
+    </source>
+    <target>
+        <entry>
+            <rumbling>executive venue manager</rumbling>
+            <concepts>
+                <concept type="gc">executive venue manager</concept>
+            </concepts>
+        </entry>
+        <entry>
+            <rumbling>venue manager</rumbling>
+            <concepts>
+                <concept type="gc">venue manager</concept>
+            </concepts>
+        </entry>
+        <entry>
+            <rumbling>venue manager generalizes executive venue manager</rumbling>
+            <concepts>
+                <concept type="gc">executive venue manager</concept>
+                <concept type="gc">venue manager</concept>
+                <concept type="vc">venue manager generalizes executive venue manager</concept>
+            </concepts>
+        </entry>
+        <entry>
+            <rumbling>venue manager cancel event</rumbling>
+            <concepts>
+                <concept type="gc">venue manager</concept>
+                <concept type="gc">event</concept>
+                <concept type="vc">venue manager cancels event</concept>
+            </concepts>
+        </entry>
+        <entry>
+            <rumbling>venue manager cancel performance</rumbling>
+            <concepts>
+                <concept type="gc">venue manager</concept>
+                <concept type="gc">performance</concept>
+                <concept type="vc">venue manager cancels performance</concept>
+            </concepts>
+        </entry>
+        <entry>
+            <rumbling>executive venue manager cancel event</rumbling>
+            <concepts>
+                <concept type="gc">executive venue manager</concept>
+                <concept type="gc">event</concept>
+                <concept type="vc">executive venue manager cancels event</concept>
+            </concepts>
+        </entry>
+        <entry>
+            <rumbling>executive venue manager cancel performance</rumbling>
+            <concepts>
+                <concept type="gc">executive venue manager</concept>
+                <concept type="gc">performance</concept>
+                <concept type="vc">executive venue manager cancels performance</concept>
+            </concepts>
+        </entry>
+        <entry>
+            <rumbling>executive venue manager reschedule event</rumbling>
+            <concepts>
+                <concept type="gc">executive venue manager</concept>
+                <concept type="gc">event</concept>
+                <concept type="vc">executive venue manager reschedules event</concept>
+            </concepts>
+        </entry>
+        <entry>
+            <rumbling>executive venue manager reschedule performance</rumbling>
+            <concepts>
+                <concept type="gc">executive venue manager</concept>
+                <concept type="gc">performance</concept>
+                <concept type="vc">executive venue manager reschedules performance</concept>
+            </concepts>
+        </entry>
+        <entry>
+            <rumbling>event moved to new data range</rumbling>
+            <concepts>
+                <concept type="gc">event</concept>
+                <concept type="gc">new data range</concept>
+                <concept type="vc">event moves to new data range</concept>
+            </concepts>
+        </entry>
+        <entry>
+            <rumbling>end date set earlier</rumbling>
+            <concepts>
+                <concept type="gc">end date</concept>
+                <concept type="vc">end date sets earlier</concept>
+            </concepts>
+        </entry>
+        <entry>
+            <rumbling>executive venue manager reschedule performance</rumbling>
+            <concepts>
+                <concept type="gc">executive venue manager</concept>
+                <concept type="gc">performance</concept>
+                <concept type="vc">executive venue manager reschedules performance</concept>
+            </concepts>
+        </entry>
+        <entry>
+            <rumbling>It is obligatory that venue manager cancel performance if venue manager cancel event</rumbling>
+            <concepts>
+                <concept type="vc">venue manager cancels performance</concept>
+                <concept type="vc">venue manager cancels event</concept>
+                <concept type="br">It is obligatory that venue manager cancels performance if venue manager cancels event</concept>
+            </concepts>
+        </entry>
+        <entry>
+            <rumbling>It is obligatory that executive venue manager cancel performance if executive venue manager cancel event</rumbling>
+            <concepts>
+                <concept type="vc">executive venue manager cancels performance</concept>
+                <concept type="vc">executive venue manager cancels event</concept>
+                <concept type="br">It is obligatory that executive venue manager cancels performance if executive venue manager cancels event</concept>
+            </concepts>
+        </entry>
+        <entry>
+            <rumbling>It is possible that executive venue manager reschedule performance if venue manager cancel performance and event moved to new data range</rumbling>
+            <concepts>
+                <concept type="vc">executive venue manager reschedules performance</concept>
+                <concept type="vc">venue manager cancels performance</concept>
+                <concept type="vc">event moves to new data range</concept>
+                <concept type="br">It is possible that executive venue manager reschedules performance if venue manager cancels performance and event moves to new data range</concept>
+            </concepts>
+        </entry>
+        <entry>
+            <rumbling>It is possible that executive venue manager reschedule performance if venue manager cancel performance and end date set earlier</rumbling>
+            <concepts>
+                <concept type="vc">executive venue manager reschedules performance</concept>
+                <concept type="vc">venue manager cancels performance</concept>
+                <concept type="vc">end date sets earlier</concept>
+                <concept type="br">It is possible that executive venue manager reschedules performance if venue manager cancels performance and end date sets earlier</concept>
+            </concepts>
+        </entry>                                                                                                                                                                  
+    </target>
+</experiment_case>

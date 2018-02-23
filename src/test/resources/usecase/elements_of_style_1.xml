@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<experiment_case>
+    <case_name>Elements of Style, Model 1</case_name>
+    <normalize>true</normalize>
+    <source>
+        <rumbling expected="gc">customer</rumbling>
+        <rumbling expected="gc">time</rumbling>
+        <rumbling expected="gc">payment processor</rumbling>
+        <rumbling expected="gc">customer support</rumbling>
+        <rumbling expected="gc">tax authority</rumbling>
+        <rumbling expected="gc">Release 1</rumbling>
+        <rumbling expected="gc">Release 2</rumbling>
+        <rumbling expected="gc">Release 3</rumbling>
+        <rumbling expected="vc">customer search for items</rumbling>
+        <rumbling expected="vc">customer place order</rumbling>
+        <rumbling expected="vc">customer obtain help</rumbling>
+        <rumbling expected="vc">time submit taxes</rumbling>
+        <rumbling expected="vc">payment processor place order</rumbling>
+        <rumbling expected="vc">customer support obtain help</rumbling>
+        <rumbling expected="vc">tax authority submit taxes</rumbling>
+    </source>
+    <target>
+        <entry>
+            <rumbling>customer</rumbling>
+            <concepts>
+                <concept type="gc">customer</concept>
+            </concepts>
+        </entry>
+        <entry>
+            <rumbling>time</rumbling>
+            <concepts>
+                <concept type="gc">time</concept>
+            </concepts>
+        </entry>
+        <entry>
+            <rumbling>payment processor</rumbling>
+            <concepts>
+                <concept type="gc">payment processor</concept>
+            </concepts>
+        </entry>
+        <entry>
+            <rumbling>customer support</rumbling>
+            <concepts>
+                <concept type="gc">customer support</concept>
+            </concepts>
+        </entry>
+        <entry>
+            <rumbling>tax authority</rumbling>
+            <concepts>
+                <concept type="gc">tax authority</concept>
+            </concepts>
+        </entry>
+        <entry>
+            <rumbling>tax authority</rumbling>
+            <concepts>
+                <concept type="gc">tax authority</concept>
+            </concepts>
+        </entry>
+        <entry>
+            <rumbling>Release 1</rumbling>
+            <concepts>
+                <concept type="ic">Release 1</concept>
+            </concepts>
+        </entry>
+        <entry>
+            <rumbling>Release 2</rumbling>
+            <concepts>
+                <concept type="ic">Release 2</concept>
+            </concepts>
+        </entry>
+        <entry>
+            <rumbling>Release 3</rumbling>
+            <concepts>
+                <concept type="ic">Release 3</concept>
+            </concepts>
+        </entry>
+        <entry>
+            <rumbling>customer search for items</rumbling>
+            <concepts>
+                <concept type="gc">customer</concept>
+                <concept type="gc">item</concept>
+                <concept type="vc">customer searches for one or more item</concept>
+            </concepts>
+        </entry>
+        <entry>
+            <rumbling>customer place order</rumbling>
+            <concepts>
+                <concept type="gc">customer</concept>
+                <concept type="gc">order</concept>
+                <concept type="vc">customer places order</concept>
+            </concepts>
+        </entry>
+        <entry>
+            <rumbling>customer obtain help</rumbling>
+            <concepts>
+                <concept type="gc">customer</concept>
+                <concept type="gc">help</concept>
+                <concept type="vc">customer obtains help</concept>
+            </concepts>
+        </entry>
+        <entry>
+            <rumbling>time submit taxes</rumbling>
+            <concepts>
+                <concept type="gc">time</concept>
+                <concept type="gc">tax</concept>
+                <concept type="vc">time submits one or more tax</concept>
+            </concepts>
+        </entry>
+        <entry>
+            <rumbling>payment processor place order</rumbling>
+            <concepts>
+                <concept type="gc">payment processor</concept>
+                <concept type="gc">order</concept>
+                <concept type="vc">payment processor places order</concept>
+            </concepts>
+        </entry>
+        <entry>
+            <rumbling>customer support obtain help</rumbling>
+            <concepts>
+                <concept type="gc">customer support</concept>
+                <concept type="gc">help</concept>
+                <concept type="vc">customer support obtains help</concept>
+            </concepts>
+        </entry>
+        <entry>
+            <rumbling>tax authority submit taxes</rumbling>
+            <concepts>
+                <concept type="gc">tax authority</concept>
+                <concept type="gc">tax</concept>
+                <concept type="vc">tax authority submits one or more tax</concept>
+            </concepts>
+        </entry>
+    </target>
+</experiment_case>
+
+

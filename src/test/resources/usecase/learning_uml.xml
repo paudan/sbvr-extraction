@@ -1,0 +1,503 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<experiment_case>
+    <case_name>Use Case model from Learning UML</case_name>
+    <normalize>true</normalize>
+    <source>
+        <rumbling expected="gc">human resource</rumbling>
+        <rumbling expected="gc">project manager</rumbling>
+        <rumbling expected="gc">resource manager</rumbling>
+        <rumbling expected="gc">system administrator</rumbling>
+        <rumbling expected="gc">printer</rumbling>
+        <rumbling expected="gc">project web server</rumbling>
+        <rumbling expected="gc">backup system</rumbling>
+        <rumbling expected="gc">project management system</rumbling>
+        <rumbling expected="vc">human resource login</rumbling>
+        <rumbling expected="vc">human resource logout</rumbling>
+        <rumbling expected="vc">human resource generalizes project manager</rumbling>
+        <rumbling expected="vc">human resource generalizes resource manager</rumbling>
+        <rumbling expected="vc">human resource generalizes system administrator</rumbling>
+        <rumbling expected="vc">project manager login</rumbling>
+        <rumbling expected="vc">project manager logout</rumbling>
+        <rumbling expected="vc">project manager publish status</rumbling>
+        <rumbling expected="vc">project manager manage project</rumbling>
+        <rumbling expected="vc">project manager maintain task</rumbling>
+        <rumbling expected="vc">project manager maintain activity</rumbling>
+        <rumbling expected="vc">project manager maintain project</rumbling>
+        <rumbling expected="vc">project manager log activity</rumbling>
+        <rumbling expected="vc">resource manager login</rumbling>
+        <rumbling expected="vc">resource manager logout</rumbling>
+        <rumbling expected="vc">resource manager manage resource</rumbling>
+        <rumbling expected="vc">resource manager log activity</rumbling>
+        <rumbling expected="vc">printer generate report</rumbling>
+        <rumbling expected="vc">printer publish status</rumbling>
+        <rumbling expected="vc">project web server generate web site</rumbling>
+        <rumbling expected="vc">project web server publish status</rumbling>
+        <rumbling expected="vc">system administrator login</rumbling>
+        <rumbling expected="vc">system administrator logout</rumbling>
+        <rumbling expected="vc">system administrator administer system</rumbling>
+        <rumbling expected="vc">system administrator startup system</rumbling>
+        <rumbling expected="vc">system administrator shutdown system</rumbling>
+        <rumbling expected="vc">system administrator restore data</rumbling>
+        <rumbling expected="vc">system administrator backup data</rumbling>
+        <rumbling expected="vc">system administrator log activity</rumbling>
+        <rumbling expected="vc">backup system administer system</rumbling>
+        <rumbling expected="vc">backup system startup system</rumbling>
+        <rumbling expected="vc">backup system shutdown system</rumbling>
+        <rumbling expected="vc">backup system restore data</rumbling>
+        <rumbling expected="vc">backup system backup data</rumbling>
+        <rumbling expected="br">It is possible that project manager maintain activity if project manager manage project</rumbling>
+        <rumbling expected="br">It is possible that project manager maintain task if project manager manage project</rumbling>
+        <rumbling expected="br">It is possible that project manager maintain project if project manager manage project</rumbling>
+        <rumbling expected="br">It is obligatory that project manager log activity if project manager manage project</rumbling>
+        <rumbling expected="br">It is obligatory that resource manager log activity if resource manager manage resource</rumbling>
+        <rumbling expected="br">It is obligatory that system administrator log activity if system administrator administer system</rumbling>
+        <rumbling expected="br">It is obligatory that system administrator startup system if system administrator administer system</rumbling>
+        <rumbling expected="br">It is obligatory that system administrator restore data if system administrator administer system and system administrator startup system</rumbling>
+        <rumbling expected="br">It is obligatory that system administrator shutdown system if system administrator administer system</rumbling>
+        <rumbling expected="br">It is obligatory that system administrator backup data if system administrator administer system and system administrator shutdown system</rumbling>
+        <rumbling expected="br">It is obligatory that backup system log activity if backup system administer system</rumbling>
+        <rumbling expected="br">It is obligatory that backup system startup system if backup system administer system</rumbling>
+        <rumbling expected="br">It is obligatory that backup system restore data if backup system administer system and backup system startup system</rumbling>
+        <rumbling expected="br">It is obligatory that backup system shutdown system if backup system administer system</rumbling>
+        <rumbling expected="br">It is obligatory that backup system backup data if backup system administer system and backup system shutdown system</rumbling>
+    </source>
+    <target>
+        <entry>
+            <rumbling>human resource</rumbling>
+            <concepts>
+                <concept type="gc">human resource</concept>
+            </concepts>
+        </entry>
+        <entry>
+            <rumbling>project manager</rumbling>
+            <concepts>
+                <concept type="gc">project manager</concept>
+            </concepts>
+        </entry>
+        <entry>
+            <rumbling>resource manager</rumbling>
+            <concepts>
+                <concept type="gc">resource manager</concept>
+            </concepts>
+        </entry>
+        <entry>
+            <rumbling>system administrator</rumbling>
+            <concepts>
+                <concept type="gc">system administrator</concept>
+            </concepts>
+        </entry>
+        <entry>
+            <rumbling>printer</rumbling>
+            <concepts>
+                <concept type="gc">printer</concept>
+            </concepts>
+        </entry>
+        <entry>
+            <rumbling>project web server</rumbling>
+            <concepts>
+                <concept type="gc">project web server</concept>
+            </concepts>
+        </entry>
+        <entry>
+            <rumbling>backup system</rumbling>
+            <concepts>
+                <concept type="gc">backup system</concept>
+            </concepts>
+        </entry>
+        <entry>
+            <rumbling>project management system</rumbling>
+            <concepts>
+                <concept type="gc">project management system</concept>
+            </concepts>
+        </entry>        
+        <entry>
+            <rumbling>human resource login</rumbling>
+            <concepts>
+                <concept type="gc">human resource</concept>
+                <concept type="vc">human resource login</concept>
+            </concepts>
+        </entry>
+        <entry>
+            <rumbling>human resource logout</rumbling>
+            <concepts>
+                <concept type="gc">human resource</concept>
+                <concept type="vc">human resource logout</concept>
+            </concepts>
+        </entry>
+        <entry>
+            <rumbling>human resource generalizes resource manager</rumbling>
+            <concepts>
+                <concept type="gc">human resource</concept>
+                <concept type="gc">resource manager</concept>
+                <concept type="vc">human resource generalizes resource manager</concept>
+            </concepts>
+        </entry>
+        <entry>
+            <rumbling>human resource generalizes project manager</rumbling>
+            <concepts>
+                <concept type="gc">human resource</concept>
+                <concept type="gc">project manager</concept>
+                <concept type="vc">human resource generalizes project manager</concept>
+            </concepts>
+        </entry>
+        <entry>
+            <rumbling>human resource generalizes system administrator</rumbling>
+            <concepts>
+                <concept type="gc">human resource</concept>
+                <concept type="gc">system administrator</concept>
+                <concept type="vc">human resource generalizes system administrator</concept>
+            </concepts>
+        </entry>
+        <entry>
+            <rumbling>project manager login</rumbling>
+            <concepts>
+                <concept type="gc">project manager</concept>
+                <concept type="vc">project manager logins</concept>
+            </concepts>
+        </entry>
+        <entry>
+            <rumbling>project manager logout</rumbling>
+            <concepts>
+                <concept type="gc">project manager</concept>
+                <concept type="vc">project manager logout</concept>
+            </concepts>
+        </entry>
+        <entry>
+            <rumbling>project manager publish status</rumbling>
+            <concepts>
+                <concept type="gc">status</concept>
+                <concept type="gc">project manager</concept>
+                <concept type="vc">project manager publishes status</concept>
+            </concepts>
+        </entry>
+        <entry>
+            <rumbling>project manager manage project</rumbling>
+            <concepts>
+                <concept type="gc">project</concept>
+                <concept type="gc">project manager</concept>
+                <concept type="vc">project manager manages project</concept>
+            </concepts>
+        </entry>
+        <entry>
+            <rumbling>project manager maintain task</rumbling>
+            <concepts>
+                <concept type="gc">task</concept>
+                <concept type="gc">project manager</concept>
+                <concept type="vc">project manager maintains task</concept>
+            </concepts>
+        </entry>
+        <entry>
+            <rumbling>project manager maintain activity</rumbling>
+            <concepts>
+                <concept type="gc">activity</concept>
+                <concept type="gc">project manager</concept>
+                <concept type="vc">project manager maintains activity</concept>
+            </concepts>
+        </entry>
+        <entry>
+            <rumbling>project manager maintain project</rumbling>
+            <concepts>
+                <concept type="gc">project</concept>
+                <concept type="gc">project manager</concept>
+                <concept type="vc">project manager maintains project</concept>
+            </concepts>
+        </entry>
+        <entry>
+            <rumbling>project manager log activity</rumbling>
+            <concepts>
+                <concept type="gc">activity</concept>
+                <concept type="gc">project manager</concept>
+                <concept type="vc">project manager logs activity</concept>
+            </concepts>
+        </entry>
+        <entry>
+            <rumbling>project manager log activity</rumbling>
+            <concepts>
+                <concept type="gc">project</concept>
+                <concept type="gc">project manager</concept>
+                <concept type="vc">project manager logs activity</concept>
+            </concepts>
+        </entry>
+        <entry>
+            <rumbling>resource manager login</rumbling>
+            <concepts>
+                <concept type="gc">resource manager</concept>
+                <concept type="vc">resource manager logins</concept>
+            </concepts>
+        </entry>
+        <entry>
+            <rumbling>resource manager logout</rumbling>
+            <concepts>
+                <concept type="gc">resource manager</concept>
+                <concept type="vc">resource manager logouts</concept>
+            </concepts>
+        </entry>
+        <entry>
+            <rumbling>resource manager manage resource</rumbling>
+            <concepts>
+                <concept type="gc">resource</concept>
+                <concept type="gc">resource manager</concept>
+                <concept type="vc">resource manager manages resource</concept>
+            </concepts>
+        </entry>
+        <entry>
+            <rumbling>resource manager log activity</rumbling>
+            <concepts>
+                <concept type="gc">activity</concept>
+                <concept type="gc">resource manager</concept>
+                <concept type="vc">resource manager logs activity</concept>
+            </concepts>
+        </entry>
+        <entry>
+            <rumbling>printer generate report</rumbling>
+            <concepts>
+                <concept type="gc">report</concept>
+                <concept type="gc">printer</concept>
+                <concept type="vc">printer generates report</concept>
+            </concepts>
+        </entry>
+        <entry>
+            <rumbling>printer publish status</rumbling>
+            <concepts>
+                <concept type="gc">status</concept>
+                <concept type="gc">printer</concept>
+                <concept type="vc">printer publishes status</concept>
+            </concepts>
+        </entry>
+        <entry>
+            <rumbling>project web server generate web site</rumbling>
+            <concepts>
+                <concept type="gc">website</concept>
+                <concept type="gc">project web server</concept>
+                <concept type="vc">project web server generates web site</concept>
+            </concepts>
+        </entry>
+        <entry>
+            <rumbling>project web server publish status</rumbling>
+            <concepts>
+                <concept type="gc">status</concept>
+                <concept type="gc">project web server</concept>
+                <concept type="vc">project web server publishes status</concept>
+            </concepts>
+        </entry>
+        <entry>
+            <rumbling>system administrator login</rumbling>
+            <concepts>
+                <concept type="gc">system administrator</concept>
+                <concept type="vc">system administrator logins</concept>
+            </concepts>
+        </entry>
+        <entry>
+            <rumbling>system administrator logout</rumbling>
+            <concepts>
+                <concept type="gc">system administrator</concept>
+                <concept type="vc">system administrator logouts</concept>
+            </concepts>
+        </entry>
+        <entry>
+            <rumbling>system administrator administer system</rumbling>
+            <concepts>
+                <concept type="gc">system administrator</concept>
+                <concept type="gc">system</concept>
+                <concept type="vc">system administrator administers system</concept>
+            </concepts>
+        </entry>
+        <entry>
+            <rumbling>system administrator startup system</rumbling>
+            <concepts>
+                <concept type="gc">system administrator</concept>
+                <concept type="gc">system</concept>
+                <concept type="vc">system administrator startups system</concept>
+            </concepts>
+        </entry>
+        <entry>
+            <rumbling>system administrator shutdown system</rumbling>
+            <concepts>
+                <concept type="gc">system administrator</concept>
+                <concept type="gc">system</concept>
+                <concept type="vc">system administrator shutdowns system</concept>
+            </concepts>
+        </entry>
+        <entry>
+            <rumbling>system administrator restore data</rumbling>
+            <concepts>
+                <concept type="gc">system administrator</concept>
+                <concept type="gc">datum</concept>
+                <concept type="vc">system administrator restores one or more datum</concept>
+            </concepts>
+        </entry>
+        <entry>
+            <rumbling>system administrator backup data</rumbling>
+            <concepts>
+                <concept type="gc">system administrator</concept>
+                <concept type="gc">datum</concept>
+                <concept type="vc">system administrator backups one or more datum</concept>
+            </concepts>
+        </entry>
+        <entry>
+            <rumbling>system administrator log activity</rumbling>
+            <concepts>
+                <concept type="gc">activity</concept>
+                <concept type="gc">system administrator</concept>
+                <concept type="vc">system administrator logs activity</concept>
+            </concepts>
+        </entry>
+        <entry>
+            <rumbling>backup system administer system</rumbling>
+            <concepts>
+                <concept type="gc">backup system</concept>
+                <concept type="gc">system</concept>
+                <concept type="vc">backup system administers system</concept>
+            </concepts>
+        </entry>
+        <entry>
+            <rumbling>backup system startup system</rumbling>
+            <concepts>
+                <concept type="gc">backup system</concept>
+                <concept type="gc">system</concept>
+                <concept type="vc">backup system startups system</concept>
+            </concepts>
+        </entry>
+        <entry>
+            <rumbling>backup system shutdown system</rumbling>
+            <concepts>
+                <concept type="gc">backup system</concept>
+                <concept type="gc">system</concept>
+                <concept type="vc">backup system shutdowns system</concept>
+            </concepts>
+        </entry>
+        <entry>
+            <rumbling>backup system restore data</rumbling>
+            <concepts>
+                <concept type="gc">backup system</concept>
+                <concept type="gc">datum</concept>
+                <concept type="vc">backup system restores one or more datum</concept>
+            </concepts>
+        </entry>
+        <entry>
+            <rumbling>backup system backup data</rumbling>
+            <concepts>
+                <concept type="gc">backup system</concept>
+                <concept type="gc">datum</concept>
+                <concept type="vc">backup system backups one or more datum</concept>
+            </concepts>
+        </entry>  
+        <entry>
+            <rumbling>It is possible that project manager maintain activity if project manager manage project</rumbling>
+            <concepts>
+                <concept type="vc">project manager maintains activity</concept>
+                <concept type="vc">project manager manages project</concept>
+                <concept type="br">It is possible that project manager maintains activity if project manager manages project</concept>
+            </concepts>
+        </entry>      
+        <entry>
+            <rumbling>It is possible that project manager maintain task if project manager manage project</rumbling>
+            <concepts>
+                <concept type="vc">project manager maintains task</concept>
+                <concept type="vc">project manager manages project</concept>
+                <concept type="br">It is possible that project manager maintains task if project manager manages project</concept>
+            </concepts>
+        </entry>
+        <entry>
+            <rumbling>It is obligatory that project manager log activity if project manager manage project</rumbling>
+            <concepts>
+                <concept type="vc">project manager logs activity</concept>
+                <concept type="vc">project manager manages project</concept>
+                <concept type="br">It is obligatory that project manager logs activity if project manager manages project</concept>
+            </concepts>
+        </entry>
+        <entry>
+            <rumbling>It is obligatory that resource manager log activity if resource manager manage resource</rumbling>
+            <concepts>
+                <concept type="vc">resource manager logs activity</concept>
+                <concept type="vc">resource manager manages resource</concept>
+                <concept type="br">It is obligatory that resource manager logs activity if resource manager manages resource</concept>
+            </concepts>
+        </entry>
+        <entry>
+            <rumbling>It is obligatory that system administrator log activity if system administrator administer system</rumbling>
+            <concepts>
+                <concept type="vc">system administrator logs activity</concept>
+                <concept type="vc">system administrator administers system</concept>
+                <concept type="br">It is obligatory that system administrator logs activity if system administrator administers system</concept>
+            </concepts>
+        </entry>
+        <entry>
+            <rumbling>It is obligatory that system administrator startup system if system administrator administer system</rumbling>
+            <concepts>
+                <concept type="vc">system administrator startups system</concept>
+                <concept type="vc">system administrator administers system</concept>
+                <concept type="br">It is obligatory that system administrator startups system if system administrator administers system</concept>
+            </concepts>
+        </entry>
+        <entry>
+            <rumbling>It is obligatory that system administrator restore data if system administrator administer system and system administrator startup system</rumbling>
+            <concepts>
+                <concept type="vc">system administrator restores one or more datum</concept>
+                <concept type="vc">system administrator administers system</concept>
+                <concept type="vc">system administrator startups system</concept>
+                <concept type="br">It is obligatory that system administrator restores one or more datum if system administrator administers system and system administrator startups system</concept>
+            </concepts>
+        </entry>
+        <entry>
+            <rumbling>It is obligatory that system administrator shutdown system if system administrator administer system</rumbling>
+            <concepts>
+                <concept type="vc">system administrator shutdowns system</concept>
+                <concept type="vc">system administrator administers system</concept>
+                <concept type="br">It is obligatory that system administrator shutdowns system if system administrator administers system</concept>
+            </concepts>
+        </entry>
+        <entry>
+            <rumbling>It is obligatory that system administrator restore data if system administrator administer system and system administrator shutdown system</rumbling>
+            <concepts>
+                <concept type="vc">system administrator restores one or more datum</concept>
+                <concept type="vc">system administrator administers system</concept>
+                <concept type="vc">system administrator shutdowns system</concept>
+                <concept type="br">It is obligatory that system administrator restores one or more datum if system administrator administers system and system administrator shutdowns system</concept>
+            </concepts>
+        </entry>
+        <entry>
+            <rumbling>It is obligatory that backup system log activity if backup system administer system</rumbling>
+            <concepts>
+                <concept type="vc">backup system logs activity</concept>
+                <concept type="vc">backup system administers system</concept>
+                <concept type="br">It is obligatory that backup system logs activity if backup system administers system</concept>
+            </concepts>
+        </entry>
+        <entry>
+            <rumbling>It is obligatory that backup system startup system if backup system administer system</rumbling>
+            <concepts>
+                <concept type="vc">backup system startups system</concept>
+                <concept type="vc">backup system administers system</concept>
+                <concept type="br">It is obligatory that backup system startups system if backup system administers system</concept>
+            </concepts>
+        </entry>
+        <entry>
+            <rumbling>It is obligatory that backup system restore data if backup system administer system and backup system startup system</rumbling>
+            <concepts>
+                <concept type="vc">backup system restores one or more datum</concept>
+                <concept type="vc">backup system administers system</concept>
+                <concept type="vc">backup system startups system</concept>
+                <concept type="br">It is obligatory that backup system restores one or more datum if backup system administers system and backup system startups system</concept>
+            </concepts>
+        </entry>
+        <entry>
+            <rumbling>It is obligatory that backup system shutdown system if backup system administer system</rumbling>
+            <concepts>
+                <concept type="vc">backup system shutdowns system</concept>
+                <concept type="vc">backup system administers system</concept>
+                <concept type="br">It is obligatory that backup system shutdowns system if backup system administers system</concept>
+            </concepts>
+        </entry>
+        <entry>
+            <rumbling>It is obligatory that backup system restore data if backup system administer system and backup system shutdown system</rumbling>
+            <concepts>
+                <concept type="vc">backup system restores one or more datum</concept>
+                <concept type="vc">backup system administers system</concept>
+                <concept type="vc">backup system shutdowns system</concept>
+                <concept type="br">It is obligatory that backup system restores one or more datum if backup system administers system and backup system shutdowns system</concept>
+            </concepts>
+        </entry>                                                                                                                                                                
+    </target>
+</experiment_case>
+

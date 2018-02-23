@@ -1,0 +1,267 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<experiment_case>
+    <case_name>Model from El-Attar (2012) Towards developing consistent misuse case models</case_name>
+    <normalize>true</normalize>
+    <source>
+        <rumbling expected="gc">voter</rumbling>
+        <rumbling expected="gc">VIP voter</rumbling>
+        <rumbling expected="gc">information thief</rumbling>
+        <rumbling expected="gc">VIP information thief</rumbling>
+        <rumbling expected="gc">too many opposition votes</rumbling>
+        <rumbling expected="vc">voter generalizes VIP voter</rumbling>
+        <rumbling expected="vc">information thief generalizes VIP information thief</rumbling>
+        <rumbling expected="vc">voter submit vote</rumbling>
+        <rumbling expected="vc">voter register voter</rumbling>
+        <rumbling expected="vc">voter encrypt data</rumbling>
+        <rumbling expected="vc">VIP voter submit vote</rumbling>
+        <rumbling expected="vc">VIP voter register VIP voter</rumbling>
+        <rumbling expected="vc">VIP voter encrypt data</rumbling>
+        <rumbling expected="vc">information thief steal sensitive information</rumbling>
+        <rumbling expected="vc">information thief get access privileges</rumbling>
+        <rumbling expected="vc">information thief change vote</rumbling>
+        <rumbling expected="vc">information thief steal voter information</rumbling>
+        <rumbling expected="vc">information thief reveal vote</rumbling>
+        <rumbling expected="vc">VIP information thief steal sensitive information</rumbling>
+        <rumbling expected="vc">VIP information thief get access privileges</rumbling>
+        <rumbling expected="vc">VIP information thief change vote</rumbling>
+        <rumbling expected="vc">VIP information thief steal voter information</rumbling>
+        <rumbling expected="vc">VIP information thief reveal vote</rumbling>
+        <rumbling expected="vc">VIP information thief steal VIP voter information</rumbling>
+        <rumbling expected="br">It is obligatory that voter encrypt data if voter register voter</rumbling>
+        <rumbling expected="br">It is obligatory that VIP voter encrypt data if VIP voter register VIP voter</rumbling>
+        <rumbling expected="br">It is obligatory that voter encrypt data if voter submit vote</rumbling>
+        <rumbling expected="br">It is obligatory that VIP voter encrypt data if VIP voter submit vote</rumbling>
+        <rumbling expected="br">It is obligatory that information thief get access privileges if information thief steal sensitive information</rumbling>
+        <rumbling expected="br">It is possible that information thief reveal vote if information thief change vote</rumbling>
+    </source>
+    <target>
+        <entry>
+            <rumbling>voter</rumbling>
+            <concepts>
+                <concept type="gc">voter</concept>
+            </concepts>
+        </entry>
+        <entry>
+            <rumbling>VIP voter</rumbling>
+            <concepts>
+                <concept type="gc">VIP voter</concept>
+            </concepts>
+        </entry>
+        <entry>
+            <rumbling>information thief</rumbling>
+            <concepts>
+                <concept type="gc">information thief</concept>
+            </concepts>
+        </entry>
+        <entry>
+            <rumbling>VIP information thief</rumbling>
+            <concepts>
+                <concept type="gc">VIP information thief</concept>
+            </concepts>
+        </entry>
+        <entry>
+            <rumbling>too many opposition votes</rumbling>
+            <concepts>
+                <concept type="gc">opposition vote</concept>
+            </concepts>
+        </entry>
+        <entry>
+            <rumbling>voter generalizes VIP voter</rumbling>
+            <concepts>
+                <concept type="gc">voter</concept>
+                <concept type="gc">VIP voter</concept>
+                <concept type="vc">voter generalizes VIP voter</concept>
+            </concepts>
+        </entry>
+        <entry>
+            <rumbling>information thief generalizes VIP information thief</rumbling>
+            <concepts>
+                <concept type="gc">information thief</concept>
+                <concept type="gc">VIP information thief</concept>
+                <concept type="vc">information thief generalizes VIP information thief</concept>
+            </concepts>
+        </entry>
+        <entry>
+            <rumbling>voter submit vote</rumbling>
+            <concepts>
+                <concept type="gc">voter</concept>
+                <concept type="gc">vote</concept>
+                <concept type="vc">voter submits vote</concept>
+            </concepts>
+        </entry>
+        <entry>
+            <rumbling>voter register voter</rumbling>
+            <concepts>
+                <concept type="gc">voter</concept>
+                <concept type="vc">voter registers voter</concept>
+            </concepts>
+        </entry>
+        <entry>
+            <rumbling>voter encrypt data</rumbling>
+            <concepts>
+                <concept type="gc">voter</concept>
+                <concept type="gc">datum</concept>
+                <concept type="vc">voter encrypts one or more datum</concept>
+            </concepts>
+        </entry>
+        <entry>
+            <rumbling>VIP voter submit vote</rumbling>
+            <concepts>
+                <concept type="gc">VIP voter</concept>
+                <concept type="gc">vote</concept>
+                <concept type="vc">VIP voter submits vote</concept>
+            </concepts>
+        </entry>
+        <entry>
+            <rumbling>VIP voter register VIP voter</rumbling>
+            <concepts>
+                <concept type="gc">VIP voter</concept>
+                <concept type="vc">VIP voter registers VIP voter</concept>
+            </concepts>
+        </entry>
+        <entry>
+            <rumbling>VIP voter encrypt data</rumbling>
+            <concepts>
+                <concept type="gc">VIP voter</concept>
+                <concept type="gc">datum</concept>
+                <concept type="vc">VIP voter encrypts one or more datum</concept>
+            </concepts>
+        </entry>
+        <entry>
+            <rumbling>information thief steal sensitive information</rumbling>
+            <concepts>
+                <concept type="gc">information thief</concept>
+                <concept type="gc">sensitive information</concept>
+                <concept type="vc">information thief steals sensitive information</concept>
+            </concepts>
+        </entry>
+        <entry>
+            <rumbling>information thief get access privileges</rumbling>
+            <concepts>
+                <concept type="gc">information thief</concept>
+                <concept type="gc">access privilege</concept>
+                <concept type="vc">information thief gets one or more access privilege</concept>
+            </concepts>
+        </entry>
+        <entry>
+            <rumbling>information thief change vote</rumbling>
+            <concepts>
+                <concept type="gc">information thief</concept>
+                <concept type="gc">vote</concept>
+                <concept type="vc">information thief changes vote</concept>
+            </concepts>
+        </entry>
+        <entry>
+            <rumbling>information thief steal voter information</rumbling>
+            <concepts>
+                <concept type="gc">information thief</concept>
+                <concept type="gc">voter information</concept>
+                <concept type="vc">information thief steals voter information</concept>
+            </concepts>
+        </entry>
+        <entry>
+            <rumbling>information thief reveal vote</rumbling>
+            <concepts>
+                <concept type="gc">information thief</concept>
+                <concept type="gc">vote</concept>
+                <concept type="vc">information thief reveals vote</concept>
+            </concepts>
+        </entry>
+        <entry>
+            <rumbling>VIP information thief steal sensitive information</rumbling>
+            <concepts>
+                <concept type="gc">VIP information thief</concept>
+                <concept type="gc">sensitive information</concept>
+                <concept type="vc">VIP information thief steals sensitive information</concept>
+            </concepts>
+        </entry>
+        <entry>
+            <rumbling>VIP information thief get access privileges</rumbling>
+            <concepts>
+                <concept type="gc">VIP information thief</concept>
+                <concept type="gc">access privilege</concept>
+                <concept type="vc">VIP information thief gets one or more access privileges</concept>
+            </concepts>
+        </entry>
+        <entry>
+            <rumbling>VIP information thief change vote</rumbling>
+            <concepts>
+                <concept type="gc">VIP information thief</concept>
+                <concept type="gc">vote</concept>
+                <concept type="vc">VIP information thief changes vote</concept>
+            </concepts>
+        </entry>
+        <entry>
+            <rumbling>VIP information thief steal voter information</rumbling>
+            <concepts>
+                <concept type="gc">VIP information thief</concept>
+                <concept type="gc">voter information</concept>
+                <concept type="vc">VIP information thief steals voter information</concept>
+            </concepts>
+        </entry>
+        <entry>
+            <rumbling>VIP information thief reveal vote</rumbling>
+            <concepts>
+                <concept type="gc">VIP information thief</concept>
+                <concept type="gc">vote</concept>
+                <concept type="vc">VIP information thief reveals vote</concept>
+            </concepts>
+        </entry>
+        <entry>
+            <rumbling>VIP information thief steal VIP voter information</rumbling>
+            <concepts>
+                <concept type="gc">VIP information thief</concept>
+                <concept type="gc">VIP voter information</concept>
+                <concept type="vc">VIP information thief steals VIP voter information</concept>
+            </concepts>
+        </entry>
+        <entry>
+            <rumbling>It is obligatory that voter encrypt data if voter register voter</rumbling>
+            <concepts>
+                <concept type="vc">voter encrypts one or more datum</concept>
+                <concept type="vc">voter registers voter</concept>
+                <concept type="br">It is obligatory that voter encrypts one or more datum if voter registers voter</concept>
+            </concepts>
+        </entry>
+        <entry>
+            <rumbling>It is obligatory that VIP voter encrypt data if VIP voter register VIP voter</rumbling>
+            <concepts>
+                <concept type="vc">VIP voter encrypts one or more datum</concept>
+                <concept type="vc">VIP voter registers VIP voter</concept>
+                <concept type="br">It is obligatory that VIP voter encrypts one or more datum if VIP voter registers VIP voter</concept>
+            </concepts>
+        </entry>
+        <entry>
+            <rumbling>It is obligatory that voter encrypt data if voter submit vote</rumbling>
+            <concepts>
+                <concept type="vc">voter encrypts one or more datum</concept>
+                <concept type="vc">voter submits vote</concept>
+                <concept type="br">It is obligatory that voter encrypts one or more datum if voter submits vote</concept>
+            </concepts>
+        </entry>
+        <entry>
+            <rumbling>It is obligatory that VIP voter encrypt data if VIP voter submit vote</rumbling>
+            <concepts>
+                <concept type="vc">VIP voter encrypts one or more datum</concept>
+                <concept type="vc">VIP voter submits vote</concept>
+                <concept type="br">It is obligatory that VIP voter encrypts one or more datum if VIP voter submits vote</concept>
+            </concepts>
+        </entry>
+        <entry>
+            <rumbling>It is obligatory that information thief get access privileges if information thief steal sensitive information</rumbling>
+            <concepts>
+                <concept type="vc">information thief gets one or more access privilege</concept>
+                <concept type="vc">information thief steals sensitive information</concept>
+                <concept type="br">It is obligatory that information thief gets one or more access privilege if information thief steals sensitive information</concept>
+            </concepts>
+        </entry>
+        <entry>
+            <rumbling>It is possible that information thief reveal vote if information thief change vote</rumbling>
+            <concepts>
+                <concept type="vc">information thief reveals vote</concept>
+                <concept type="vc">information thief changes vote</concept>
+                <concept type="br">It is possible that information thief reveals vote if information thief changes vote</concept>
+            </concepts>
+        </entry>
+    </target>
+</experiment_case>

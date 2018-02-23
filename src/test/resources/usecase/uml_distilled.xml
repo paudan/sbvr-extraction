@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<experiment_case>
+    <case_name>Use Case model from UML Distilled</case_name>
+    <normalize>true</normalize>
+    <source>
+        <rumbling expected="gc">trading manager</rumbling>
+        <rumbling expected="gc">accounting system</rumbling>
+        <rumbling expected="gc">trader</rumbling>
+        <rumbling expected="gc">salesperson</rumbling>
+        <rumbling expected="vc">trading manager set limits</rumbling>
+        <rumbling expected="vc">accounting system update accounts</rumbling>
+        <rumbling expected="vc">trader analyze risk</rumbling>
+        <rumbling expected="vc">trader price deal</rumbling>
+        <rumbling expected="vc">trader capture deal</rumbling>
+        <rumbling expected="vc">trader valuation</rumbling>
+        <rumbling expected="vc">trader limit exceeded</rumbling>
+        <rumbling expected="vc">salesperson price deal</rumbling>
+        <rumbling expected="vc">salesperson capture deal</rumbling>
+        <rumbling expected="vc">salesperson limit exceeded</rumbling>
+        <rumbling expected="br">It is obligatory that trader analyze risk if trader perform valuation</rumbling>
+        <rumbling expected="br">It is obligatory that trader price deal if trader perform valuation</rumbling>
+    </source>
+    <target>
+        <entry>
+            <rumbling>trading manager</rumbling>
+            <concepts>
+                <concept type="gc">trading manager</concept>
+            </concepts>
+        </entry>
+        <entry>
+            <rumbling>accounting system</rumbling>
+            <concepts>
+                <concept type="gc">accounting system</concept>
+            </concepts>
+        </entry>
+        <entry>
+            <rumbling>trader</rumbling>
+            <concepts>
+                <concept type="gc">trader</concept>
+            </concepts>
+        </entry>
+        <entry>
+            <rumbling>salesperson</rumbling>
+            <concepts>
+                <concept type="gc">salesperson</concept>
+            </concepts>
+        </entry>
+        <entry>
+            <rumbling>trading manager set limits</rumbling>
+            <concepts>
+                <concept type="gc">trading manager</concept>
+                <concept type="gc">limit</concept>
+                <concept type="vc">trading manager sets one or more limit</concept>
+            </concepts>
+        </entry>
+        <entry>
+            <rumbling>accounting system update accounts</rumbling>
+            <concepts>
+                <concept type="gc">accounting system</concept>
+                <concept type="gc">account</concept>
+                <concept type="vc">accounting system updates one or more account</concept>
+            </concepts>
+        </entry>
+        <entry>
+            <rumbling>trader analyze risk</rumbling>
+            <concepts>
+                <concept type="gc">trader</concept>
+                <concept type="gc">risk</concept>
+                <concept type="vc">trader analyzes risk</concept>
+            </concepts>
+        </entry>
+        <entry>
+            <rumbling>trader price deal</rumbling>
+            <concepts>
+                <concept type="gc">trader</concept>
+                <concept type="gc">deal</concept>
+                <concept type="vc">trader prices deal</concept>
+            </concepts>
+        </entry>
+        <entry>
+            <rumbling>trader capture deal</rumbling>
+            <concepts>
+                <concept type="gc">trader</concept>
+                <concept type="gc">deal</concept>
+                <concept type="vc">trader capture deal</concept>
+            </concepts>
+        </entry>
+        <entry>
+            <rumbling>trader limit exceeded</rumbling>
+            <concepts>
+                <concept type="gc">trader</concept>
+                <concept type="gc">limit</concept>
+                <concept type="vc">trader exceed limit</concept>
+            </concepts>
+        </entry>
+        <entry>
+            <rumbling>trader valuation</rumbling>
+            <concepts>
+                <concept type="gc">trader</concept>
+                <concept type="gc">valuation</concept>
+                <concept type="vc">trader performs valuation</concept>
+            </concepts>
+        </entry>
+        <entry>
+            <rumbling>salesperson price deal</rumbling>
+            <concepts>
+                <concept type="gc">salesperson</concept>
+                <concept type="gc">deal</concept>
+                <concept type="vc">salesperson prices deal</concept>
+            </concepts>
+        </entry>
+        <entry>
+            <rumbling>salesperson capture deal</rumbling>
+            <concepts>
+                <concept type="gc">salesperson</concept>
+                <concept type="gc">deal</concept>
+                <concept type="vc">salesperson captures deal</concept>
+            </concepts>
+        </entry>
+        <entry>
+            <rumbling>salesperson limit exceeded</rumbling>
+            <concepts>
+                <concept type="gc">salesperson limit</concept>
+                <concept type="vc">salesperson limit exceeds</concept>
+            </concepts>
+        </entry>
+        <entry>
+            <rumbling>It is obligatory that trader analyze risk if trader perform valuation</rumbling>
+            <concepts>
+                <concept type="vc">trader analyzes risk</concept>
+                <concept type="vc">trader performs valuation</concept>
+                <concept type="br">It is obligatory that trader analyzes risk if trader performs valuation</concept>
+            </concepts>
+        </entry>
+        <entry>
+            <rumbling>It is obligatory that trader price deal if trader perform valuation</rumbling>
+            <concepts>
+                <concept type="vc">trader prices deal</concept>
+                <concept type="vc">trader performs valuation</concept>
+                <concept type="br">It is obligatory that trader prices deal if trader performs valuation</concept>
+            </concepts>
+        </entry>                                                                                                                                                                     
+    </target>
+</experiment_case>

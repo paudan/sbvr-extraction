@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<experiment_case>
+    <case_name>UML Bible Model 1</case_name>
+    <normalize>true</normalize>
+    <source>
+        <rumbling expected="gc">agent</rumbling>
+        <rumbling expected="vc">agent authorize access</rumbling>
+        <rumbling expected="vc">agent view contract</rumbling>
+        <rumbling expected="vc">agent view sales agreement</rumbling>
+        <rumbling expected="vc">agent view sales</rumbling>
+        <rumbling expected="vc">agent add customer</rumbling>
+        <rumbling expected="vc">agent update customer</rumbling>
+        <rumbling expected="vc">agent find order</rumbling>
+        <rumbling expected="vc">agent refund order</rumbling>
+        <rumbling expected="vc">agent select seats</rumbling>
+        <rumbling expected="vc">agent place order</rumbling>
+        <rumbling expected="vc">agent select performance</rumbling>
+        <rumbling expected="br">It is obligatory that agent select performance if agent place order</rumbling>
+        <rumbling expected="br">It is obligatory that agent select seats if agent place order</rumbling>
+        <rumbling expected="br">It is obligatory that agent find order if agent refund order</rumbling>
+    </source>
+    <target>
+        <entry>
+            <rumbling>agent</rumbling>
+            <concepts>
+                <concept type="gc">agent</concept>
+            </concepts>
+        </entry>
+        <entry>
+            <rumbling>agent authorize access</rumbling>
+            <concepts>
+                <concept type="gc">agent</concept>
+                <concept type="gc">access</concept>
+                <concept type="vc">agent authorize access</concept>
+            </concepts>
+        </entry>
+        <entry>
+            <rumbling>agent view contract</rumbling>
+            <concepts>
+                <concept type="gc">agent</concept>
+                <concept type="gc">contract</concept>
+                <concept type="vc">agent views contract</concept>
+            </concepts>
+        </entry>
+        <entry>
+            <rumbling>agent view sales agreement</rumbling>
+            <concepts>
+                <concept type="gc">agent</concept>
+                <concept type="gc">sales agreement</concept>
+                <concept type="vc">agent views sales agreement</concept>
+            </concepts>
+        </entry>
+        <entry>
+            <rumbling>agent view sales</rumbling>
+            <concepts>
+                <concept type="gc">agent</concept>
+                <concept type="gc">sale</concept>
+                <concept type="vc">agent views one or more sale</concept>
+            </concepts>
+        </entry>
+        <entry>
+            <rumbling>agent add customer</rumbling>
+            <concepts>
+                <concept type="gc">agent</concept>
+                <concept type="gc">customer</concept>
+                <concept type="vc">agent adds customer</concept>
+            </concepts>
+        </entry>
+        <entry>
+            <rumbling>agent update customer</rumbling>
+            <concepts>
+                <concept type="gc">agent</concept>
+                <concept type="gc">customer</concept>
+                <concept type="vc">agent updates customer</concept>
+            </concepts>
+        </entry>
+        <entry>
+            <rumbling>agent find order</rumbling>
+            <concepts>
+                <concept type="gc">agent</concept>
+                <concept type="gc">order</concept>
+                <concept type="vc">agent finds order</concept>
+            </concepts>
+        </entry>
+        <entry>
+            <rumbling>agent refund order</rumbling>
+            <concepts>
+                <concept type="gc">agent</concept>
+                <concept type="gc">order</concept>
+                <concept type="vc">agent refunds order</concept>
+            </concepts>
+        </entry>
+        <entry>
+            <rumbling>agent select seats</rumbling>
+            <concepts>
+                <concept type="gc">agent</concept>
+                <concept type="gc">seat</concept>
+                <concept type="vc">agent selects one or more seat</concept>
+            </concepts>
+        </entry>
+        <entry>
+            <rumbling>agent place order</rumbling>
+            <concepts>
+                <concept type="gc">agent</concept>
+                <concept type="gc">order</concept>
+                <concept type="vc">agent places order</concept>
+            </concepts>
+        </entry>
+        <entry>
+            <rumbling>agent select performance</rumbling>
+            <concepts>
+                <concept type="gc">agent</concept>
+                <concept type="gc">performance</concept>
+                <concept type="vc">agent selects performance</concept>
+            </concepts>
+        </entry>
+        <entry>
+            <rumbling>It is obligatory that agent select performance if agent place order</rumbling>
+            <concepts>
+                <concept type="vc">agent selects performance</concept>
+                <concept type="vc">agent places order</concept>
+                <concept type="br">It is obligatory that agent selects performance if agent places order</concept>
+            </concepts>
+        </entry>
+        <entry>
+            <rumbling>It is obligatory that agent select seats if agent place order</rumbling>
+            <concepts>
+                <concept type="vc">agent selects one or more seat</concept>
+                <concept type="vc">agent places order</concept>
+                <concept type="br">It is obligatory that agent selects one or more seat if agent places order</concept>
+            </concepts>
+        </entry>
+        <entry>
+            <rumbling>It is obligatory that agent find order if agent refund order</rumbling>
+            <concepts>
+                <concept type="vc">agent finds order</concept>
+                <concept type="vc">agent refunds order</concept>
+                <concept type="br">It is obligatory that agent finds order if agent refunds order</concept>
+            </concepts>
+        </entry>                                                                                                                                                                        
+    </target>
+</experiment_case>

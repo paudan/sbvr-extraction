@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<experiment_case>
+    <case_name>Model from El-Attar, Miller (2007) Producing robust use case diagrams via reverse engineering of use case descriptions</case_name>
+    <normalize>true</normalize>
+    <source>
+        <rumbling expected="gc">customer</rumbling>
+        <rumbling expected="gc">credit card validation system</rumbling>
+        <rumbling expected="vc">customer winning ticket entered</rumbling>
+        <rumbling expected="vc">customer buy team merchandise</rumbling>
+        <rumbling expected="vc">customer buy tickets</rumbling>
+        <rumbling expected="vc">customer buy on-sale tickets</rumbling>
+        <rumbling expected="vc">customer purchase using hockey team card</rumbling>
+        <rumbling expected="vc">customer purchase with credit card</rumbling>
+        <rumbling expected="vc">customer perform transaction</rumbling>
+        <rumbling expected="vc">winning ticket was entered</rumbling>
+        <rumbling expected="vc">credit card validation system purchase with credit card</rumbling>
+        <rumbling expected="br">It is possible that customer winning ticket entered if winning ticket was entered and customer buy team merchandise</rumbling>
+        <rumbling expected="br">It is obligatory that customer perform transaction if customer buy tickets</rumbling>
+        <rumbling expected="br">It is obligatory that customer perform transaction if customer buy on-sale tickets</rumbling>
+        <rumbling expected="br">It is obligatory that customer perform transaction if customer buy team merchandise</rumbling>
+    </source>
+    <target>
+        <entry>
+            <rumbling>customer</rumbling>
+            <concepts>
+                <concept type="gc">customer</concept>
+            </concepts>
+        </entry>
+        <entry>
+            <rumbling>credit card validation system</rumbling>
+            <concepts>
+                <concept type="gc">credit card validation system</concept>
+            </concepts>
+        </entry>
+        <entry>
+            <rumbling>customer winning ticket entered</rumbling>
+            <concepts>
+                <concept type="gc">customer</concept>
+                <concept type="gc">winning ticket</concept>
+                <concept type="vc">customer enters winning ticket</concept>
+            </concepts>
+        </entry>
+        <entry>
+            <rumbling>customer buy team merchandise</rumbling>
+            <concepts>
+                <concept type="gc">customer</concept>
+                <concept type="gc">team merchandise</concept>
+                <concept type="vc">customer buys team merchandise</concept>
+            </concepts>
+        </entry>
+        <entry>
+            <rumbling>customer buy tickets</rumbling>
+            <concepts>
+                <concept type="gc">customer</concept>
+                <concept type="gc">ticket</concept>
+                <concept type="vc">customer buys one or more ticket</concept>
+            </concepts>
+        </entry>
+        <entry>
+            <rumbling>customer buy on-sale tickets</rumbling>
+            <concepts>
+                <concept type="gc">customer</concept>
+                <concept type="gc">sale ticket</concept>
+                <concept type="vc">customer buys one or more on-sale ticket</concept>
+            </concepts>
+        </entry>
+        <entry>
+            <rumbling>customer purchase using hockey team card</rumbling>
+            <concepts>
+                <concept type="gc">customer</concept>
+                <concept type="gc">hockey team card</concept>
+                <concept type="vc">customer purchases using hockey team card</concept>
+            </concepts>
+        </entry>
+        <entry>
+            <rumbling>customer purchase with credit card</rumbling>
+            <concepts>
+                <concept type="gc">customer</concept>
+                <concept type="gc">credit card</concept>
+                <concept type="vc">customer purchases with credit card</concept>
+            </concepts>
+        </entry>
+        <entry>
+            <rumbling>customer perform transaction</rumbling>
+            <concepts>
+                <concept type="gc">customer</concept>
+                <concept type="gc">transaction</concept>
+                <concept type="vc">customer performs transaction</concept>
+            </concepts>
+        </entry>
+        <rumbling expected="vc">winning ticket was entered</rumbling>
+        <entry>
+            <rumbling>winning ticket was entered</rumbling>
+            <concepts>
+                <concept type="gc">winning ticket</concept>
+                <concept type="vc">winning ticket is entered</concept>
+            </concepts>
+        </entry>
+        <entry>
+            <rumbling>credit card validation system purchase with credit card</rumbling>
+            <concepts>
+                <concept type="gc">credit card validation system</concept>
+                <concept type="gc">credit card</concept>
+                <concept type="vc">credit card validation system purchases with credit card</concept>
+            </concepts>
+        </entry>
+        <entry>
+            <rumbling>It is possible that customer winning ticket entered if winning ticket was entered and customer buy team merchandise</rumbling>
+            <concepts>
+                <concept type="vc">customer enters winning ticket</concept>
+                <concept type="vc">winning ticket is entered</concept>
+                <concept type="vc">customer buys team merchandise</concept>
+                <concept type="br">It is possible that customer enters winning ticket if winning ticket is entered and customer buys team merchandise</concept>
+            </concepts>
+        </entry> 
+        <entry>
+            <rumbling>It is obligatory that customer perform transaction if customer buy tickets</rumbling>
+            <concepts>
+                <concept type="vc">customer performs transaction</concept>
+                <concept type="vc">customer buys ticket</concept>
+                <concept type="br">It is obligatory that customer performs transaction if customer buys one or more ticket</concept>
+            </concepts>
+        </entry> 
+        <entry>
+            <rumbling>It is obligatory that customer perform transaction if customer buy on-sale tickets</rumbling>
+            <concepts>
+                <concept type="vc">customer performs transaction</concept>
+                <concept type="vc">customer buys on sale ticket</concept>
+                <concept type="br">It is obligatory that customer performs transaction if customer buys one or more on-sale ticket</concept>
+            </concepts>
+        </entry>
+        <entry>
+            <rumbling>It is obligatory that customer perform transaction if customer buy team merchandise</rumbling>
+            <concepts>
+                <concept type="vc">customer performs transaction</concept>
+                <concept type="vc">customer buys team merchandise</concept>
+                <concept type="br">It is obligatory that customer performs transaction if customer buys team merchandise</concept>
+            </concepts>
+        </entry>
+    </target>
+</experiment_case>
+
+
+

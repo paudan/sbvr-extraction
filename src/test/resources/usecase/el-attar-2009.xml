@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<experiment_case>
+    <case_name>Model from El-Attar, Miller (2009) Improving the quality of use case models using antipatterns</case_name>
+    <normalize>true</normalize>
+    <source>
+        <rumbling expected="gc">database integrator</rumbling>
+        <rumbling expected="vc">database integrator integrate query results</rumbling>
+        <rumbling expected="vc">database integrator query local database</rumbling>
+        <rumbling expected="vc">database integrator query remote database</rumbling>
+        <rumbling expected="vc">database integrator update collections data</rumbling>
+        <rumbling expected="vc">database integrator edit collections data</rumbling>
+        <rumbling expected="vc">database integrator run QC tests</rumbling>
+        <rumbling expected="vc">database integrator upload DGB and UCM data</rumbling>
+        <rumbling expected="br">It is obligatory that database integrator integrate query results if database integrator query local database</rumbling>
+        <rumbling expected="br">It is obligatory that database integrator integrate query results if database integrator query remote database</rumbling>
+        <rumbling expected="br">It is obligatory that database integrator edit collections data if database integrator update collections data</rumbling>
+        <rumbling expected="br">It is obligatory that database integrator run QC tests if database integrator update collections data</rumbling>
+        <rumbling expected="br">It is obligatory that database integrator query remote database if database integrator run QC tests</rumbling>
+        <rumbling expected="br">It is obligatory that database integrator upload DGB and UCM data if database integrator run QC tests</rumbling>
+    </source>
+    <target>
+        <entry>
+            <rumbling>database integrator</rumbling>
+            <concepts>
+                <concept type="gc">database integrator</concept>
+            </concepts>
+        </entry>
+        <entry>
+            <rumbling>database integrator integrate query results</rumbling>
+            <concepts>
+                <concept type="gc">database integrator</concept>
+                <concept type="gc">query result</concept>
+                <concept type="vc">database integrator integrates one or more query result</concept>
+            </concepts>
+        </entry>
+        <entry>
+            <rumbling>database integrator query local database</rumbling>
+            <concepts>
+                <concept type="gc">database integrator</concept>
+                <concept type="gc">local database</concept>
+                <concept type="vc">database integrator queries local database</concept>
+            </concepts>
+        </entry>
+        <entry>
+            <rumbling>database integrator query remote database</rumbling>
+            <concepts>
+                <concept type="gc">database integrator</concept>
+                <concept type="gc">remote database</concept>
+                <concept type="vc">database integrator queries remote database</concept>
+            </concepts>
+        </entry>
+        <entry>
+            <rumbling>database integrator update collections data</rumbling>
+            <concepts>
+                <concept type="gc">database integrator</concept>
+                <concept type="gc">collections datum</concept>
+                <concept type="vc">database integrator updates one or more collections datum</concept>
+            </concepts>
+        </entry>
+        <entry>
+            <rumbling>database integrator edit collections data</rumbling>
+            <concepts>
+                <concept type="gc">database integrator</concept>
+                <concept type="gc">collections datum</concept>
+                <concept type="vc">database integrator edits one or more collections datum</concept>
+            </concepts>
+        </entry>
+        <entry>
+            <rumbling>database integrator run QC tests</rumbling>
+            <concepts>
+                <concept type="gc">database integrator</concept>
+                <concept type="gc">QC test</concept>
+                <concept type="vc">database integrator runs one or more QC test</concept>
+            </concepts>
+        </entry>
+        <entry>
+            <rumbling>database integrator upload DGB and UCM data</rumbling>
+            <concepts>
+                <concept type="gc">database integrator</concept>
+                <concept type="gc">DGB and UCM datum</concept>
+                <concept type="vc">database integrator uploads one or more DGB and UCM datum</concept>
+            </concepts>
+        </entry>
+        <entry>
+            <rumbling>It is obligatory that database integrator integrate query results if database integrator query local database</rumbling>
+            <concepts>
+                <concept type="vc">database integrator integrates one or more query result</concept>
+                <concept type="vc">database integrator queries local database</concept>
+                <concept type="br">It is obligatory that database integrator integrates one or more query result if database integrator queries local database</concept>
+            </concepts>
+        </entry>
+        <entry>
+            <rumbling>It is obligatory that database integrator integrate query results if database integrator query remote database</rumbling>
+            <concepts>
+                <concept type="vc">database integrator integrates one or more query result</concept>
+                <concept type="vc">database integrator queries remote database</concept>
+                <concept type="br">It is obligatory that database integrator integrates one or more query result if database integrator queries remote database</concept>
+            </concepts>
+        </entry>
+        <entry>
+            <rumbling>It is obligatory that database integrator edit collections data if database integrator update collections data</rumbling>
+            <concepts>
+                <concept type="vc">database integrator edits one or more collections datum</concept>
+                <concept type="vc">database integrator updates one or more collections datum</concept>
+                <concept type="br">It is obligatory that database integrator edits one or more collections datum if database integrator updates one or more collections datum</concept>
+            </concepts>
+        </entry>
+        <entry>
+            <rumbling>It is obligatory that database integrator run QC tests if database integrator update collections data</rumbling>
+            <concepts>
+                <concept type="vc">database integrator runs one or more QC test</concept>
+                <concept type="vc">database integrator updates one or more collections datum</concept>
+                <concept type="br">It is obligatory that database integrator runs one or more QC test if database integrator updates one or more collections datum</concept>
+            </concepts>
+        </entry>
+        <entry>
+            <rumbling>It is obligatory that database integrator query remote database if database integrator run QC tests</rumbling>
+            <concepts>
+                <concept type="vc">database integrator queries remote database</concept>
+                <concept type="vc">database integrator runs one or more QC test</concept>
+                <concept type="br">It is obligatory that database integrator queries remote database if database integrator runs one or more QC test</concept>
+            </concepts>
+        </entry>
+        <entry>
+            <rumbling>It is obligatory that database integrator upload DGB and UCM data if database integrator run QC tests</rumbling>
+            <concepts>
+                <concept type="vc">database integrator uploads one or more DGB and UCM datum</concept>
+                <concept type="vc">database integrator runs one or more QC test</concept>
+                <concept type="br">It is obligatory that database integrator uploads one or more DGB and UCM datum if database integrator runs one or more QC test</concept>
+            </concepts>
+        </entry>
+    </target>
+</experiment_case>

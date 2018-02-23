@@ -1,0 +1,324 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<experiment_case>
+    <case_name>VEPSEM UseCase model (modified)</case_name>
+    <normalize>true</normalize>
+    <source>
+        <rumbling expected="gc">car reservation</rumbling>
+        <rumbling expected="gc">rental manager's assistant</rumbling>
+        <rumbling expected="gc">additional personal data</rumbling>
+        <rumbling expected="gc">car rental system</rumbling>
+        <rumbling expected="gc">rental contracts</rumbling>
+        <rumbling expected="gc">car booking</rumbling>
+        <rumbling expected="gc">walk-in car booking</rumbling>
+        <rumbling expected="gc">sales manager</rumbling>
+        <rumbling expected="gc">rental insurance</rumbling>
+        <rumbling expected="gc">rental manager</rumbling>
+        <rumbling expected="gc">consumer</rumbling>
+        <rumbling expected="gc">customer</rumbling>
+        <rumbling expected="gc">John</rumbling>
+        
+        <rumbling expected="vc">rental contract is confirmed</rumbling>
+        <rumbling expected="vc">sales manager is absent</rumbling>
+        <rumbling expected="vc">rental manager generalizes rental manager's assistant</rumbling>
+        <rumbling expected="vc">customer make car booking</rumbling>
+        <rumbling expected="vc">additional personal data is required</rumbling>
+        <rumbling expected="vc">rental managers create rental contract</rumbling>
+        <rumbling expected="vc">customer make walk-in car booking</rumbling>
+        <rumbling expected="vc">rental manager's assistant created rental contract</rumbling>
+        <rumbling expected="vc">rental manager's assistant manage rental insurance</rumbling>
+        <rumbling expected="vc">customer confirm rental contract</rumbling>
+        <rumbling expected="vc">rental manager's assistant confirm car reservation</rumbling>
+        <rumbling expected="vc">customer provide additional personal data</rumbling>
+        
+        <rumbling expected="br">It is permitted that customer provide additional personal data if rental managers work with rental contract</rumbling>
+        <rumbling expected="br">It is obligatory that customer confirm rental contract if rental managers create rental contract</rumbling>
+        <rumbling expected="br">It is obligatory that rental manager's assistant confirm car reservation if rental contract is confirmed</rumbling>
+        <rumbling expected="br">It is permitted that customer provide additional personal data if rental manager's assistant create rental contract</rumbling>
+        <rumbling expected="br">It is obligatory that rental manager's assistant create rental contract if sales manager is absent</rumbling>
+        <rumbling expected="br">It is obligatory that customer confirm rental contract if rental manager's assistant create rental contract</rumbling>
+        <rumbling expected="br">It is obligatory that rental manager's assistant managed car insurance if rental manager's assistant creates rental contract</rumbling>
+        <rumbling expected="br">It is obligatory that rental manager's assistant managed car insurance if rental manager create rental contract</rumbling>
+        <rumbling expected="br">It is obligatory that rental manager create a rental contract if customer make car booking</rumbling>
+        <rumbling expected="br">It is obligatory that consumer provide additional personal data if additional personal data is required</rumbling>
+        <rumbling expected="br">It is permitted that rental manager's assistant confirm car reservation if rental manager's assistant create rental contract</rumbling>
+        <rumbling expected="br">It is permitted that rental manager's assistant confirm a car reservation if rental manager create rental contract</rumbling>
+        <rumbling expected="br">It is obligatory that rental manager's assistant create a rental contract if customer makes car booking</rumbling>        
+    </source>
+    <target>
+        <entry>
+            <rumbling>car reservation</rumbling>
+            <concepts>
+                <concept type="gc">car reservation</concept>
+            </concepts>
+        </entry>
+        <entry>
+            <rumbling>rental manager's assistant</rumbling>
+            <concepts>
+                <concept type="gc">rental manager's assistant</concept>
+            </concepts>
+        </entry>
+        <entry>
+            <rumbling>additional personal data</rumbling>
+            <concepts>
+                <concept type="gc">additional personal datum</concept>
+            </concepts>
+        </entry>
+        <entry>
+            <rumbling>car rental system</rumbling>
+            <concepts>
+                <concept type="gc">car rental system</concept>
+            </concepts>
+        </entry>
+        <entry>
+            <rumbling>rental contracts</rumbling>
+            <concepts>
+                <concept type="gc">rental contract</concept>
+            </concepts>
+        </entry>
+        <entry>
+            <rumbling>car booking</rumbling>
+            <concepts>
+                <concept type="gc">car booking</concept>
+            </concepts>
+        </entry>
+        <entry>
+            <rumbling>walk-in car booking</rumbling>
+            <concepts>
+                <concept type="gc">walk-in car booking</concept>
+            </concepts>
+        </entry>
+        <entry>
+            <rumbling>sales manager</rumbling>
+            <concepts>
+                <concept type="gc">sales manager</concept>
+            </concepts>
+        </entry>
+        <entry>
+            <rumbling>rental insurance</rumbling>
+            <concepts>
+                <concept type="gc">rental insurance</concept>
+            </concepts>
+        </entry>
+        <entry>
+            <rumbling>rental manager</rumbling>
+            <concepts>
+                <concept type="gc">rental manager</concept>
+            </concepts>
+        </entry>
+        <entry>
+            <rumbling>consumer</rumbling>
+            <concepts>
+                <concept type="gc">consumer</concept>
+            </concepts>
+        </entry>
+        <entry>
+            <rumbling>customer</rumbling>
+            <concepts>
+                <concept type="gc">customer</concept>
+            </concepts>
+        </entry>
+        <entry>
+            <rumbling>John</rumbling>
+            <concepts>
+                <concept type="ic">John</concept>
+            </concepts>
+        </entry>        
+        <entry>
+            <rumbling>rental contract is confirmed</rumbling>
+            <concepts>
+                <concept type="gc">rental contract</concept>
+                <concept type="vc">rental contract is confirmed</concept>
+            </concepts>
+        </entry>
+        <entry>
+            <rumbling>sales manager is absent</rumbling>
+            <concepts>
+                <concept type="gc">sales manager</concept>
+                <concept type="vc">sales manager is absent</concept>
+            </concepts>
+        </entry>
+        <entry>
+            <rumbling>rental manager generalizes rental manager's assistant</rumbling>
+            <concepts>
+                <concept type="gc">rental manager</concept>
+                <concept type="gc">rental manager's assistant</concept>
+                <concept type="vc">rental manager generalizes rental manager's assistant</concept>
+            </concepts>
+        </entry>
+        <entry>
+            <rumbling>customer make car booking</rumbling>
+            <concepts>
+                <concept type="gc">customer</concept>
+                <concept type="gc">car booking</concept>
+                <concept type="vc">customer makes car booking</concept>
+            </concepts>
+        </entry>
+        <entry>
+            <rumbling>additional personal data is required</rumbling>
+            <concepts>
+                <concept type="gc">additional personal datum</concept>
+                <concept type="vc">one or more additional personal datum is required</concept>
+            </concepts>
+        </entry>
+        <entry>
+            <rumbling>rental managers create rental contract</rumbling>
+            <concepts>
+                <concept type="gc">rental manager</concept>
+                <concept type="gc">rental contract</concept>
+                <concept type="vc">one or more rental manager creates rental contract</concept>
+            </concepts>
+        </entry>
+        <entry>
+            <rumbling>customer make walk-in car booking</rumbling>
+            <concepts>
+                <concept type="gc">customer</concept>
+                <concept type="gc">walk-in car booking</concept>
+                <concept type="vc">customer makes walk-in car booking</concept>
+            </concepts>
+        </entry>
+        <entry>
+            <rumbling>rental manager's assistant created rental contract</rumbling>
+            <concepts>
+                <concept type="gc">rental manager's assistant</concept>
+                <concept type="gc">rental contract</concept>
+                <concept type="vc">rental manager's assistant creates rental contract</concept>
+            </concepts>
+        </entry>
+        <entry>
+            <rumbling>rental manager's assistant manage rental insurance</rumbling>
+            <concepts>
+                <concept type="gc">rental manager's assistant</concept>
+                <concept type="gc">rental insurance</concept>
+                <concept type="vc">rental manager's assistant manages rental insurance</concept>
+            </concepts>
+        </entry>
+        <entry>
+            <rumbling>customer confirm rental contract</rumbling>
+            <concepts>
+                <concept type="gc">customer</concept>
+                <concept type="gc">rental contract</concept>
+                <concept type="vc">customer confirms rental contract</concept>
+            </concepts>
+        </entry>
+        <entry>
+            <rumbling>rental manager's assistant confirm car reservation</rumbling>
+            <concepts>
+                <concept type="gc">rental manager's assistant</concept>
+                <concept type="gc">car reservation</concept>
+                <concept type="vc">rental manager's assistant confirms car reservation</concept>
+            </concepts>
+        </entry>
+        <entry>
+            <rumbling>customer provide additional personal data</rumbling>
+            <concepts>
+                <concept type="gc">customer</concept>
+                <concept type="gc">additional personal datum</concept>
+                <concept type="vc">customer provides one or more additional personal datum</concept>
+            </concepts>
+        </entry>
+        <entry>
+            <rumbling>It is permitted that customer provide additional personal data if rental managers work with rental contract</rumbling>
+            <concepts>
+                <concept type="vc">customer provides one or more additional personal datum</concept>
+                <concept type="vc">one or more rental manager works with rental contract</concept>
+                <concept type="br">It is permitted that customer provides one or more additional personal datum if one or more rental manager works with rental contract</concept>
+            </concepts>
+        </entry>
+        <entry>
+            <rumbling>It is obligatory that customer confirm rental contract if rental managers create rental contract</rumbling>
+            <concepts>
+                <concept type="vc">customer confirms rental contract</concept>
+                <concept type="vc">one or more rental manager creates rental contract</concept>
+                <concept type="br">It is obligatory that customer confirms rental contract if one or more rental manager creates rental contract</concept>
+            </concepts>
+        </entry>
+        <entry>
+            <rumbling>It is obligatory that rental manager's assistant confirm car reservation if rental contract is confirmed</rumbling>
+            <concepts>
+                <concept type="vc">rental manager's assistant confirms car reservation</concept>
+                <concept type="vc">rental contract is confirmed</concept>
+                <concept type="br">It is obligatory that rental manager's assistant confirms car reservation if rental contract is confirmed</concept>
+            </concepts>
+        </entry>
+        <entry>
+            <rumbling>It is permitted that customer provide additional personal data if rental manager's assistant create rental contract</rumbling>
+            <concepts>
+                <concept type="vc">customer provides one or more additional personal datum</concept>
+                <concept type="vc">rental manager's assistant creates rental contract</concept>
+                <concept type="br">It is permitted that customer provides one or more additional personal datum if rental manager's assistant creates rental contract</concept>
+            </concepts>
+        </entry>
+        <entry>
+            <rumbling>It is obligatory that rental manager's assistant create rental contract if sales manager is absent</rumbling>
+            <concepts>
+                <concept type="vc">sales manager is absent</concept>
+                <concept type="vc">rental manager's assistant creates rental contract</concept>
+                <concept type="br">It is obligatory that rental manager's assistant creates rental contract if sales manager is absent</concept>
+            </concepts>
+        </entry>
+        <entry>
+            <rumbling>It is obligatory that customer confirm rental contract if rental manager's assistant create rental contract</rumbling>
+            <concepts>
+                <concept type="vc">customer confirms rental contract</concept>
+                <concept type="vc">rental manager's assistant creates rental contract</concept>
+                <concept type="br">It is obligatory that customer confirms rental contract if rental manager's assistant creates rental contract</concept>
+            </concepts>
+        </entry>
+        <entry>
+            <rumbling>It is obligatory that rental manager's assistant managed car insurance if rental manager's assistant creates rental contract</rumbling>
+            <concepts>
+                <concept type="vc">rental manager's assistant manages car insurance</concept>
+                <concept type="vc">rental manager's assistant creates rental contract</concept>
+                <concept type="br">It is obligatory that rental manager's assistant manages car insurance if rental manager's assistant creates rental contract</concept>
+            </concepts>
+        </entry>
+        <entry>
+            <rumbling>It is obligatory that rental manager's assistant managed car insurance if rental manager's assistant create rental contract</rumbling>
+            <concepts>
+                <concept type="vc">rental manager's assistant manages car insurance</concept>
+                <concept type="vc">rental manager's assistant creates rental contract</concept>
+                <concept type="br">It is obligatory that rental manager manages car insurance if rental manager's assistant creates rental contract</concept>
+            </concepts>
+        </entry>
+        <entry>
+            <rumbling>It is obligatory that rental manager create a rental contract if customer make car booking</rumbling>
+            <concepts>
+                <concept type="vc">rental manager creates rental contract</concept>
+                <concept type="vc">customer makes car booking</concept>
+                <concept type="br">It is obligatory that rental manager creates rental contract if customer makes car booking</concept>
+            </concepts>
+        </entry>
+        <entry>
+            <rumbling>It is obligatory that consumer provide additional personal data if additional personal data is required</rumbling>
+            <concepts>
+                <concept type="vc">consumer provides one or more additional personal datum</concept>
+                <concept type="vc">additional personal datum is required</concept>
+                <concept type="br">It is obligatory that consumer provides one or more additional personal datum if one or more additional personal datum is required</concept>
+            </concepts>
+        </entry>
+        <entry>
+            <rumbling>It is permitted that rental manager's assistant confirm car reservation if rental manager's assistant create rental contract</rumbling>
+            <concepts>
+                <concept type="vc">rental manager's assistant confirms car reservation</concept>
+                <concept type="vc">rental manager's assistant creates rental contract</concept>
+                <concept type="br">It is permitted that rental manager's assistant confirms car reservation if rental manager's assistant creates rental contract</concept>
+            </concepts>
+        </entry>
+        <entry>
+            <rumbling>It is permitted that rental manager's assistant confirm a car reservation if rental manager create rental contract</rumbling>
+            <concepts>
+                <concept type="vc">rental manager's assistant confirms car reservation</concept>
+                <concept type="vc">rental manager creates rental contract</concept>
+                <concept type="br">It is permitted that rental manager's assistant confirms car reservation if rental manager creates rental contract</concept>
+            </concepts>
+        </entry>
+        <entry>
+            <rumbling>It is obligatory that rental manager's assistant create a rental contract if customer makes car booking</rumbling>
+            <concepts>
+                <concept type="vc">rental manager's assistant creates rental contract</concept>
+                <concept type="vc">customer makes car booking</concept>
+                <concept type="br">It is obligatory that rental manager's assistant creates rental contract if customer makes car booking</concept>
+            </concepts>
+        </entry>
+    </target>
+</experiment_case>

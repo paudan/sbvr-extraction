@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<experiment_case>
+    <case_name>UML Specification Model 1</case_name>
+    <normalize>true</normalize>
+    <source>
+        <rumbling expected="gc">Transaction Use Cases</rumbling>
+        <rumbling expected="gc">ATM services</rumbling>
+        <rumbling expected="gc">Administration</rumbling>
+        <rumbling expected="vc">Transaction Use Cases card identification</rumbling>
+        <rumbling expected="vc">Transaction Use Cases perform ATM transaction</rumbling>
+        <rumbling expected="vc">Transaction Use Cases on-line help</rumbling>
+        <rumbling expected="vc">ATM Services withdraw</rumbling>
+        <rumbling expected="vc">ATM Services transfer funds</rumbling>
+        <rumbling expected="vc">ATM Services deposit funds</rumbling>
+        <rumbling expected="vc">Administration read log</rumbling>
+        <rumbling expected="vc">Administration register ATM at bank</rumbling>
+        <rumbling expected="vc">customer selected HELP</rumbling>
+        <rumbling expected="br">It is obligatory that Transaction Use Cases card identification if ATM Services withdraw</rumbling>
+        <rumbling expected="br">It is obligatory that Transaction Use Cases card identification if ATM Services transfer funds</rumbling>
+        <rumbling expected="br">It is possible that Transaction Use Cases on-line help if ATM Services transfer funds and customer selected HELP</rumbling>
+    </source>
+    <target>
+        <entry>
+            <rumbling>Transaction Use Cases</rumbling>
+            <concepts>
+                <concept type="ic">Transaction Use Cases</concept>
+            </concepts>
+        </entry>
+        <entry>
+            <rumbling>ATM services</rumbling>
+            <concepts>
+                <concept type="ic">ATM services</concept>
+            </concepts>
+        </entry>
+        <entry>
+            <rumbling>Administration</rumbling>
+            <concepts>
+                <concept type="ic">Administration</concept>
+            </concepts>
+        </entry>
+        <entry>
+            <rumbling>ATM Services withdraw</rumbling>
+            <concepts>
+                <concept type="ic">ATM Services</concept>
+                <concept type="vc">ATM Services withdraws</concept>
+            </concepts>
+        </entry>
+        <entry>
+            <rumbling>Transaction Use Cases card identification</rumbling>
+            <concepts>
+                <concept type="ic">Transaction Use Cases</concept>
+                <concept type="gc">card identification</concept>
+                <concept type="vc">Transaction Use Cases performs card identification</concept>
+            </concepts>
+        </entry>
+        <entry>
+            <rumbling>Transaction Use Cases perform ATM transaction</rumbling>
+            <concepts>
+                <concept type="ic">Transaction Use Cases</concept>
+                <concept type="gc">ATM transaction</concept>
+                <concept type="vc">Transaction Use Cases performs ATM transaction</concept>
+            </concepts>
+        </entry>
+        <entry>
+            <rumbling>Transaction Use Cases on-line help</rumbling>
+            <concepts>
+                <concept type="ic">Transaction Use Cases performs</concept>
+                <concept type="gc">on-line help</concept>
+                <concept type="vc">Transaction Use Cases performs on-line help</concept>
+            </concepts>
+        </entry>
+        <entry>
+            <rumbling>ATM Services transfer funds</rumbling>
+            <concepts>
+                <concept type="ic">ATM Services</concept>
+                <concept type="gc">fund</concept>
+                <concept type="vc">ATM Services transfers one or more fund</concept>
+            </concepts>
+        </entry>
+        <entry>
+            <rumbling>ATM Services deposit funds</rumbling>
+            <concepts>
+                <concept type="ic">ATM Services</concept>
+                <concept type="gc">funds</concept>
+                <concept type="vc">ATM Services deposits one or more fund</concept>
+            </concepts>
+        </entry>
+        <entry>
+            <rumbling>Administration read log</rumbling>
+            <concepts>
+                <concept type="ic">Administration</concept>
+                <concept type="gc">log</concept>
+                <concept type="vc">Administration reads log</concept>
+            </concepts>
+        </entry>
+        <entry>
+            <rumbling>Administration register ATM at bank</rumbling>
+            <concepts>
+                <concept type="ic">Administration</concept>
+                <concept type="gc">ATM</concept>
+                <concept type="gc">bank</concept>
+                <concept type="vc">Administration registers ATM at bank</concept>
+            </concepts>
+        </entry>
+        <entry>
+            <rumbling>customer selected HELP</rumbling>
+            <concepts>
+                <concept type="ic">HELP</concept>
+                <concept type="gc">customer</concept>
+                <concept type="vc">customer selects HELP</concept>
+            </concepts>
+        </entry>
+                <entry>
+            <rumbling>It is obligatory that Transaction Use Cases card identification if ATM Services withdraw</rumbling>
+            <concepts>
+                <concept type="vc">Transaction Use Cases performs card identification</concept>
+                <concept type="vc">ATM Services withdraws</concept>
+                <concept type="br">It is obligatory that Transaction Use Cases performs card identification if ATM Services withdraws</concept>
+            </concepts>
+        </entry>
+                <entry>
+            <rumbling>It is obligatory that Transaction Use Cases card identification if ATM Services transfer funds</rumbling>
+            <concepts>
+                <concept type="vc">Transaction Use Cases performs card identification</concept>
+                <concept type="vc">ATM Services transfers one or more fund</concept>
+                <concept type="br">It is obligatory that Transaction Use Cases performs card identification if ATM Services transfers one or more fund</concept>
+            </concepts>
+        </entry>
+        <entry>
+            <rumbling>It is possible that Transaction Use Cases on-line help if ATM Services transfer funds and customer selected HELP</rumbling>
+            <concepts>
+                <concept type="vc"> Transaction Use Cases performs on-line help</concept>
+                <concept type="vc">ATM Services transfers one or more fund</concept>
+                <concept type="vc">customer selects HELP</concept>
+                <concept type="br">It is possible that Transaction Use Cases performs on-line help if ATM Services transfers one or more fund and customer selects HELP</concept>
+            </concepts>
+        </entry>                                                                                                                                                   
+    </target>
+</experiment_case>
