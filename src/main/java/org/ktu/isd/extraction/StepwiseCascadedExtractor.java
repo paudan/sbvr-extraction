@@ -19,7 +19,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
@@ -46,11 +45,9 @@ import net.tmine.processing.NamedEntityFinder;
 import net.tmine.processing.POSTagger;
 import org.apache.commons.collections4.bidimap.DualHashBidiMap;
 import org.apache.commons.lang3.StringUtils;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import simplenlg.features.Tense;
 
-public class StepwiseCascadedExtractor implements VocabularyExtractor {
+public class StepwiseCascadedExtractor extends AbstractVocabularyExtractor {
 
     protected static final String RECOGNIZED_GC = "CGC";
     protected static final String RECOGNIZED_IC = "CIC";
@@ -118,28 +115,15 @@ public class StepwiseCascadedExtractor implements VocabularyExtractor {
      * Whether replacement with synonyms should be enabled 
      */
     private boolean replaceSynonyms = Boolean.FALSE;
-    /**
-     * Whether normalization (use of lemmas) should be enabled
-     * Note, that while this is helpful to extract more valid concepts, it would also result in some information loss, e.g.:
-     * - verb forms or tense information, such as {@code creates};
-     * - nouns forms, which must be multiple by nature, e.g., {@code United States}
-     */
-    private boolean normalize = Boolean.FALSE;
     protected boolean searchForVerbs = Boolean.TRUE;
 
-    protected Map<String, ConceptType> rumblings;
     private Map<String, Set<SBVRExpressionModel>> conceptsByRumbling = new HashMap<>();
 
     protected NamedEntityFinder finder;
     protected SentenceFactory sentFactory;
     protected POSTagger tagger;
-    protected Map<String, SBVRExpressionModel> generalConcepts, individualConcepts,
-            verbConcepts, businessRules;
-    protected Map<String, Map<SBVRExpressionModel, ConceptType>> mapExtracted = new HashMap<>();
     // Replacements which should be applied in case of wrong POS recognition (e.g., when POS tagger identified as NN, while it was actually VB) 
     protected Map<String, PosReplacementData> wrongPosReplacements;
-    
-    private final Logger logger = LoggerFactory.getLogger(getClass());
     
 
     protected static class ProcessedStructure {
@@ -230,32 +214,16 @@ public class StepwiseCascadedExtractor implements VocabularyExtractor {
 
     public StepwiseCascadedExtractor(Map<String, ConceptType> rumblings,
             NamedEntityFinder finder, SentenceFactory factory) {
-        this.rumblings = rumblings;
+        super(rumblings);
         this.finder = finder;
         this.sentFactory = factory;
-        Comparator<String> lenComparator = new Comparator<String>() {
-            @Override
-            public int compare(String s1, String s2) {
-                if (s1.length() > s2.length())
-                    return -1;
-                else if (s1.length() < s2.length())
-                    return 1;
-                else
-                    return s1.compareTo(s2);
-            }
-        };
-        generalConcepts = new TreeMap<>(lenComparator);
-        individualConcepts = new TreeMap<>(lenComparator);
-        verbConcepts = new TreeMap<>(lenComparator);
-        businessRules = new TreeMap<>(lenComparator);
-        // Must enforce to set loner phrases at the beginning of the list
-        wrongPosReplacements = new TreeMap<>(lenComparator);
+        // Must enforce to set longer phrases at the beginning of the list
+        wrongPosReplacements = new TreeMap<>(this.getDefaultComparator());
         initOverrides();
     }
     
     public StepwiseCascadedExtractor(NamedEntityFinder finder, SentenceFactory factory) {
         this(null, finder, factory);
-        this.rumblings = new HashMap<>();
     }
 
     private void initOverrides() {
@@ -271,14 +239,6 @@ public class StepwiseCascadedExtractor implements VocabularyExtractor {
                 PATTERN_COMBINED_VC, PATTERN_COMBINED_VC, PATTERN_COMBINED_VC);
     }
 
-    public Map<String, ConceptType> getRumblings() {
-        return rumblings;
-    }
-
-    public void setRumblings(Map<String, ConceptType> rumblings) {
-        this.rumblings = rumblings;
-    }
-    
     public NamedEntityFinder getNamedEntityFinder() {
         return finder;
     }
@@ -315,59 +275,10 @@ public class StepwiseCascadedExtractor implements VocabularyExtractor {
         return normalize;
     }
 
-    public void setUseNormalization(boolean useNorm) {
-        this.normalize = useNorm;
-    }
-
     @Override
-    public Collection<SBVRExpressionModel> getExtractedGeneralConcepts() {
-        return Collections.unmodifiableCollection(generalConcepts.values());
-    }
-
-    @Override
-    public Collection<SBVRExpressionModel> getExtractedIndividualConcepts() {
-        return Collections.unmodifiableCollection(individualConcepts.values());
-    }
-
-    @Override
-    public Collection<SBVRExpressionModel> getExtractedVerbConcepts() {
-        return Collections.unmodifiableCollection(verbConcepts.values());
-    }
-
-    @Override
-    public Collection<SBVRExpressionModel> getExtractedBusinessRules() {
-        return Collections.unmodifiableCollection(businessRules.values());
-    }
-
-    @Override
-    public Map<String, Map<SBVRExpressionModel, ConceptType>> getExtractedConceptsAsMap() {
-        return Collections.unmodifiableMap(mapExtracted);
-    }
-
-    private void clearResultStructures() {
-        generalConcepts.clear();
-        individualConcepts.clear();
-        verbConcepts.clear();
-        businessRules.clear();
-        for (String key : mapExtracted.keySet())
-            mapExtracted.get(key).clear();
-        mapExtracted.clear();
+    protected void clearResultStructures() {
+        super.clearResultStructures();
         wrongPosReplacements.clear();
-    }
-
-    private void addConceptToExtractedMap(String key, SBVRExpressionModel concept, ConceptType conceptType, boolean replace) {
-        Map<SBVRExpressionModel, ConceptType> conceptSet = mapExtracted.get(key);
-        if (replace) {
-            conceptSet = new HashMap<>();
-            conceptSet.put(concept, conceptType);
-            mapExtracted.put(key, conceptSet);
-        } else {
-            if (conceptSet == null) {
-                conceptSet = new HashMap<>();
-                mapExtracted.put(key, conceptSet);
-            }
-            conceptSet.put(concept, conceptType);
-        }
     }
 
     private Sentence preprocessSentence(Sentence sent) {
