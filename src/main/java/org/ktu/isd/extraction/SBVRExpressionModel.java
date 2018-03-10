@@ -38,7 +38,8 @@ public class SBVRExpressionModel implements Cloneable, Comparable<SBVRExpression
 
     public enum RuleType {
         OBLIGATION("It is obligatory that"),
-        PERMISSION("It is permitted that");
+        PERMISSION("It is permitted that"),
+        POSSIBILITY("It is possible that");
 
         private final String expr;
 
@@ -156,6 +157,13 @@ public class SBVRExpressionModel implements Cloneable, Comparable<SBVRExpression
         mmVocConcept = modification.mmVocConcept;
         synonymous_forms = modification.synonymous_forms;
     }
+    
+    public SBVRExpressionModel remove(int i) {
+        types.remove(i);
+        expressions.remove(i);
+        identified.remove(i);
+        return this;
+    }    
 
     public boolean isAuto() {
         return auto;
