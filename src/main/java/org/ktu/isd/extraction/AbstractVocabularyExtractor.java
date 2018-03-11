@@ -28,6 +28,15 @@ abstract public class AbstractVocabularyExtractor implements VocabularyExtractor
 
     public AbstractVocabularyExtractor(Map<String, ConceptType> rumblings) {
         this.rumblings = rumblings;
+        initialize();    
+    }
+
+    public AbstractVocabularyExtractor() {
+        this.rumblings = null;
+        initialize();
+    }
+    
+    protected void initialize() {
         // Must enforce to set longer phrases at the beginning of the list
         Comparator<String> lenComparator = this.getDefaultComparator();
         generalConcepts = new TreeMap<>(lenComparator);
@@ -115,7 +124,8 @@ abstract public class AbstractVocabularyExtractor implements VocabularyExtractor
     
     protected Set<String> filterRumblingsByType(ConceptType conceptType) {
         return rumblings.entrySet().stream()
-           .filter(map -> map.getValue().equals(ConceptType.GENERAL_CONCEPT) && map.getKey().trim().length() > 0)
+           .filter(map -> map.getValue().equals(conceptType) && map.getKey().trim().length() > 0)
            .collect(Collectors.toMap(p -> p.getKey(), p -> p.getValue())).keySet();
     }
+    
 }

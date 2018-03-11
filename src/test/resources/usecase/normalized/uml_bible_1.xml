@@ -31,7 +31,7 @@
             <concepts>
                 <concept type="gc">agent</concept>
                 <concept type="gc">access</concept>
-                <concept type="vc">agent authorize access</concept>
+                <concept type="vc">agent authorizes access</concept>
             </concepts>
         </entry>
         <entry>

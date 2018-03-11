@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<experiment_case>
+    <case_name>UML Specification Model 1</case_name>
+    <normalize>false</normalize>
+    <source>
+        <rumbling expected="gc">customer</rumbling>
+        <rumbling expected="gc">administrator</rumbling>
+        <rumbling expected="gc">bank</rumbling>
+        <rumbling expected="gc">ATM system</rumbling>
+        <rumbling expected="vc">customer withdraw</rumbling>
+        <rumbling expected="vc">customer transfer funds</rumbling>
+        <rumbling expected="vc">customer deposit money</rumbling>
+        <rumbling expected="vc">customer generalizes administrator</rumbling>
+        <rumbling expected="vc">administrator register ATM at bank</rumbling>
+        <rumbling expected="vc">administrator read log</rumbling>
+        <rumbling expected="vc">bank deposit money</rumbling>
+        <rumbling expected="vc">bank register ATM at bank</rumbling>
+    </source>
+        <target>
+        <entry>
+            <rumbling>customer</rumbling>
+            <concepts>
+                <concept type="gc">customer</concept>
+            </concepts>
+        </entry>
+        <entry>
+            <rumbling>administrator</rumbling>
+            <concepts>
+                <concept type="gc">administrator</concept>
+            </concepts>
+        </entry>
+        <entry>
+            <rumbling>bank</rumbling>
+            <concepts>
+                <concept type="gc">bank</concept>
+            </concepts>
+        </entry>
+        <entry>
+            <rumbling>ATM system</rumbling>
+            <concepts>
+                <concept type="gc">ATM system</concept>
+            </concepts>
+        </entry>
+        <entry>
+            <rumbling>customer withdraw</rumbling>
+            <concepts>
+                <concept type="gc">customer</concept>
+                <concept type="vc">customer withdraw</concept>
+            </concepts>
+        </entry>
+        <entry>
+            <rumbling>customer transfer funds</rumbling>
+            <concepts>
+                <concept type="gc">customer</concept>
+                <concept type="gc">fund</concept>
+                <concept type="vc">customer transfer funds</concept>
+            </concepts>
+        </entry>
+        <entry>
+            <rumbling>customer deposit money</rumbling>
+            <concepts>
+                <concept type="gc">customer</concept>
+                <concept type="gc">money</concept>
+                <concept type="vc">customer deposit money</concept>
+            </concepts>
+        </entry>
+        <entry>
+            <rumbling>customer generalizes administrator</rumbling>
+            <concepts>
+                <concept type="gc">customer</concept>
+                <concept type="gc">administrator</concept>
+                <concept type="vc">customer generalizes administrator</concept>
+            </concepts>
+        </entry>
+        <entry>
+            <rumbling>administrator register ATM at bank</rumbling>
+            <concepts>
+                <concept type="gc">administrator</concept>
+                <concept type="gc">ATM</concept>
+                <concept type="gc">bank</concept>
+                <concept type="vc">administrator register ATM at bank</concept>
+            </concepts>
+        </entry>
+        <entry>
+            <rumbling>administrator read log</rumbling>
+            <concepts>
+                <concept type="gc">administrator</concept>
+                <concept type="gc">log</concept>
+                <concept type="vc">administrator read log</concept>
+            </concepts>
+        </entry>
+        <entry>
+            <rumbling>bank deposit money</rumbling>
+            <concepts>
+                <concept type="gc">bank</concept>
+                <concept type="gc">money</concept>
+                <concept type="vc">bank deposit money</concept>
+            </concepts>
+        </entry>
+        <entry>
+            <rumbling>bank register ATM at bank</rumbling>
+            <concepts>
+                <concept type="gc">bank</concept>
+                <concept type="gc">ATM</concept>
+                <concept type="vc">bank register ATM at bank</concept>
+            </concepts>
+        </entry>                                                                                                                                                             
+    </target>
+</experiment_case>

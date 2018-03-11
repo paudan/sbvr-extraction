@@ -24,6 +24,7 @@ import org.junit.Test;
 import org.ktu.isd.extraction.ExtractionExperiment;
 import org.ktu.isd.extraction.ExtractionExperiment.ExperimentConfigException;
 import org.ktu.isd.extraction.SimpleCascadedExtractor;
+import org.ktu.isd.extraction.SimulatedAutoExtraction;
 import org.ktu.isd.extraction.StepwiseCascadedExtractor;
 import org.ktu.isd.extraction.VocabularyExtractor;
 import org.slf4j.Logger;
@@ -33,12 +34,13 @@ public class TestUseCaseExperiment {
     
     private VocabularyExtractor[] extractors = {
         new StepwiseCascadedExtractor(NamedEntityFinder.getInstance(), SentenceFactory.getInstance()),
-        new SimpleCascadedExtractor(NamedEntityFinder.getInstance(), SentenceFactory.getInstance())
+        new SimpleCascadedExtractor(NamedEntityFinder.getInstance(), SentenceFactory.getInstance()),
+        new SimulatedAutoExtraction()
     };
     
     private void runExperimentWithModel(String xmlPath, VocabularyExtractor extractor) {
         ClassLoader classLoader = TestUseCaseExperiment.class.getClassLoader();
-        URL urlScores = classLoader.getResource("usecase/" + xmlPath);
+        URL urlScores = classLoader.getResource("usecase/normalized/" + xmlPath);
         Logger logger = LoggerFactory.getLogger(TestUseCaseExperiment.class.getName());
         try {
             ExtractionExperiment experiment = new ExtractionExperiment(extractor, new File(urlScores.getFile()));

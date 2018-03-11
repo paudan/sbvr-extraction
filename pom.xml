@@ -33,9 +33,82 @@
             <version>1.0</version>
         </dependency>
     </dependencies>
+        <build> 
+        <plugins>
+            <plugin>
+                <groupId>com.googlecode.maven-download-plugin</groupId>
+                <artifactId>download-maven-plugin</artifactId>
+                <version>1.3.0</version>
+                <executions>
+                    <execution>
+                        <id>wordnet</id>
+                        <phase>process-resources</phase>
+                        <goals>
+                            <goal>wget</goal>
+                        </goals>
+                        <configuration>
+                            <url>http://wordnetcode.princeton.edu/3.0/WordNet-3.0.tar.gz</url>
+                            <unpack>true</unpack>
+                            <outputDirectory>${wordnet.path}</outputDirectory>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <artifactId>maven-resources-plugin</artifactId>
+                <version>3.0.1</version>
+                <executions>
+                    <execution>
+                        <id>copy-resources</id>
+                        <phase>process-resources</phase>
+                        <goals>
+                            <goal>copy-resources</goal>
+                        </goals>
+                        <configuration>
+                            <outputDirectory>${wordnet.path}</outputDirectory>
+                            <resources>          
+                                <resource>
+                                    <directory>${wordnet.path}/WordNet-3.0/dict</directory>
+                                    <filtering>true</filtering>
+                                </resource>
+                            </resources>              
+                        </configuration>            
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-antrun-plugin</artifactId>
+                <version>1.7</version>
+                <executions>
+                    <execution>
+                        <phase>process-resources</phase>
+                        <configuration>
+                            <target>
+                                <delete dir="${wordnet.path}/WordNet-3.0"/>
+                                <move file="${wordnet.path}/data.adj" tofile="${wordnet.path}/data.adj" />
+                                <move file="${wordnet.path}/data.adv" tofile="${wordnet.path}/data.adv" />
+                                <move file="${wordnet.path}/data.noun" tofile="${wordnet.path}/data.noun" />
+                                <move file="${wordnet.path}/data.verb" tofile="${wordnet.path}/data.verb" />
+                                <move file="${wordnet.path}/index.adj" tofile="${wordnet.path}/index.adj" />
+                                <move file="${wordnet.path}/index.adv" tofile="${wordnet.path}/index.adv" />
+                                <move file="${wordnet.path}/index.noun" tofile="${wordnet.path}/index.noun" />
+                                <move file="${wordnet.path}/index.sense" tofile="${wordnet.path}/index.sense" />
+                                <move file="${wordnet.path}/index.verb" tofile="${wordnet.path}/index.verb" />
+                            </target>
+                        </configuration>
+                        <goals>
+                            <goal>run</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
+        <wordnet.path>../dict</wordnet.path>
     </properties>
 </project>

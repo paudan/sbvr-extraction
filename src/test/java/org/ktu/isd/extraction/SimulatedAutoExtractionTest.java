@@ -16,16 +16,26 @@
 
 package org.ktu.isd.extraction;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import java.util.stream.Collectors;
+import net.tmine.entities.InitializationException;
+import static org.hamcrest.CoreMatchers.hasItems;
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertThat;
 import org.junit.Test;
 import org.ktu.isd.extraction.SBVRExpressionModel.RuleType;
+import org.ktu.isd.extraction.VocabularyExtractor.ConceptType;
 
 public class SimulatedAutoExtractionTest {
     
     @Test
     public void testProcessBRRumbling1() {
-        SimulatedAutoExtraction extract = new SimulatedAutoExtraction(null);
+        SimulatedAutoExtraction extract = new SimulatedAutoExtraction();
         String testString1 = "It is possible that customer winning ticket entered if winning ticket was entered and customer buy team merchandise";
         Object [] processed = extract.processBRRumbling(testString1);
         List<String> candidates = (List<String>) processed[0];
@@ -38,7 +48,7 @@ public class SimulatedAutoExtractionTest {
 
     @Test
     public void testProcessBRRumbling2() {
-        SimulatedAutoExtraction extract = new SimulatedAutoExtraction(null);
+        SimulatedAutoExtraction extract = new SimulatedAutoExtraction();
         String testString = "It is obligatory that customer winning ticket entered if winning ticket was entered and customer buy team merchandise"
                 + " and customer buys one or more ticket and customer buys one or more ticket and customer buys one or more ticket";
         Object [] processed = extract.processBRRumbling(testString);
@@ -54,7 +64,7 @@ public class SimulatedAutoExtractionTest {
     
     @Test
     public void testProcessBRRumbling3() {
-        SimulatedAutoExtraction extract = new SimulatedAutoExtraction(null);
+        SimulatedAutoExtraction extract = new SimulatedAutoExtraction();
         String testString = "It is obligatory that customer winning ticket entered if winning ticket was entered";
         Object [] processed = extract.processBRRumbling(testString);
         List<String> candidates = (List<String>) processed[0];
@@ -66,7 +76,7 @@ public class SimulatedAutoExtractionTest {
     
     @Test
     public void testProcessBRRumbling4() {
-        SimulatedAutoExtraction extract = new SimulatedAutoExtraction(null);
+        SimulatedAutoExtraction extract = new SimulatedAutoExtraction();
         String testString = "It is obligatory that customer winning ticket entered";
         Object [] processed = extract.processBRRumbling(testString);
         List<String> candidates = (List<String>) processed[0];
@@ -74,4 +84,56 @@ public class SimulatedAutoExtractionTest {
         assertEquals(candidates.get(0), "customer winning ticket entered");
         assertEquals(RuleType.OBLIGATION, (RuleType) processed[1]);
     }   
+    
+    @Test
+    public void testExtraction1() {
+        Map<String, ConceptType> rumblingsMap = new HashMap<>();
+        String brule1 = "It is possible that customer winning ticket entered if winning ticket was entered and customer buy team merchandise";
+        rumblingsMap.put(brule1, ConceptType.BUSINESS_RULE);
+        SimulatedAutoExtraction extraction = new SimulatedAutoExtraction(rumblingsMap);
+        try {
+            extraction.extract();
+        } catch (InitializationException ex) {
+            Logger.getLogger(SimulatedAutoExtractionTest.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        Map<String, Map<SBVRExpressionModel, ConceptType>> extracted = extraction.getExtractedConceptsAsMap();
+        Map<SBVRExpressionModel, ConceptType> ruleExtracted = extracted.get(brule1);
+        assertEquals(4, ruleExtracted.size());
+        checkExistsInExtracted(ruleExtracted, ConceptType.BUSINESS_RULE, brule1);
+        String vcExtracted[] = new String [] {
+            "customer winning ticket entered", "winning ticket was entered", "customer buy team merchandise"
+        };
+        checkExistsInExtracted(ruleExtracted, ConceptType.VERB_CONCEPT, vcExtracted);
+        
+        String vc1 = "customer winning ticket entered";
+        Map<SBVRExpressionModel, ConceptType> vcExtracted1 = extracted.get(vc1);
+        assertEquals(3, vcExtracted1.size());
+        checkExistsInExtracted(vcExtracted1, ConceptType.VERB_CONCEPT, vc1);
+        checkExistsInExtracted(vcExtracted1, ConceptType.GENERAL_CONCEPT, "customer", "ticket entered");
+        String vc2 = "winning ticket was entered";
+        Map<SBVRExpressionModel, ConceptType> vcExtracted2 = extracted.get(vc2);
+        assertEquals(3, vcExtracted2.size());
+        checkExistsInExtracted(vcExtracted2, ConceptType.VERB_CONCEPT, vc2);
+        checkExistsInExtracted(vcExtracted2, ConceptType.GENERAL_CONCEPT, "winning", "was entered");
+        String vc3 = "customer buy team merchandise";
+        Map<SBVRExpressionModel, ConceptType> vcExtracted3 = extracted.get(vc3);
+        assertEquals(3, vcExtracted3.size());
+        checkExistsInExtracted(vcExtracted3, ConceptType.VERB_CONCEPT, vc3);
+        checkExistsInExtracted(vcExtracted3, ConceptType.GENERAL_CONCEPT, "customer", "team merchandise");
+    }
+    
+    private void checkExistsInExtracted(Map<SBVRExpressionModel, ConceptType> extracted, ConceptType cType, String... items) {
+        Set<String> extractedRules = extracted.entrySet().stream()
+           .filter(map -> map.getValue().equals(cType))
+           .collect(Collectors.toMap(p -> p.getKey().toString(), p -> p.getValue())).keySet();
+        assertThat(extractedRules, hasItems(items));
+    }
+    
+    @Test
+    public void testSplit() {
+        String rumbling = "test";
+        String parts[] = rumbling.split(" ");
+        assertEquals(1, parts.length);
+        assertEquals("test", parts[0]);
+    }
 }

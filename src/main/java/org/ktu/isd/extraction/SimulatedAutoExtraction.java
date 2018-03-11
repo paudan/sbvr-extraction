@@ -1,6 +1,7 @@
 package org.ktu.isd.extraction;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
@@ -17,6 +18,18 @@ public class SimulatedAutoExtraction extends AbstractVocabularyExtractor {
 
     public SimulatedAutoExtraction(Map<String, ConceptType> rumblings) {
         super(rumblings);
+    }
+
+    public SimulatedAutoExtraction() {
+        super();
+    }
+    
+    public boolean isIndividualConcept(String rumbling) {
+        String[] words = rumbling.split(" ");
+        for (String word: words)
+            if (!Character.isUpperCase(word.charAt(0)))
+                return false;
+        return true;
     }
 
     public Object[] processBRRumbling(String rumbling) {
@@ -53,8 +66,22 @@ public class SimulatedAutoExtraction extends AbstractVocabularyExtractor {
         }
         return new Object[]{result, ruleType};
     }
+    
+    private void addGeneralConcept(String candString, String rumbling) {
+        SBVRExpressionModel gc2 = new SBVRExpressionModel();
+        ConceptType type = ConceptType.GENERAL_CONCEPT;
+        if (isIndividualConcept(candString)) {
+            gc2 = gc2.addIndividualConcept(candString, true);
+            type = ConceptType.INDIVIDUAL_CONCEPT;
+        } else 
+            gc2 = gc2.addGeneralConcept(candString, true);
+        addConceptToExtractedMap(rumbling, gc2, type, false);
+    }
 
     private SBVRExpressionModel processVCRumbling(String rumbling) {
+        rumbling = rumbling.trim();
+        if (rumbling.trim().length() == 0)
+            return null;
         Set<String> gcCandidates = filterRumblingsByType(ConceptType.GENERAL_CONCEPT);
         for (String gc : gcCandidates)
             if (rumbling.startsWith(gc)) {
@@ -65,16 +92,15 @@ public class SimulatedAutoExtraction extends AbstractVocabularyExtractor {
                 if (verb_phrase.length() == 0)
                     continue;
                 String end_phrase = last_part.substring(verb_phrase.length()).trim();
-                SBVRExpressionModel gc1 = new SBVRExpressionModel().addGeneralConcept(gc, true);
-                addConceptToExtractedMap(rumbling, gc1, ConceptType.GENERAL_CONCEPT, true);
-                SBVRExpressionModel concept = new SBVRExpressionModel().addGeneralConcept(gc, true)
-                        .addVerbConcept(verb_phrase, true);
+                addGeneralConcept(gc, rumbling);
+                SBVRExpressionModel concept = new SBVRExpressionModel();
+                concept = isIndividualConcept(gc) ? concept.addGeneralConcept(gc, true) : concept.addIndividualConcept(gc, true);
+                concept = concept.addVerbConcept(verb_phrase, true);
                 if (end_phrase.length() > 0) {
-                    SBVRExpressionModel gc2 = new SBVRExpressionModel().addGeneralConcept(end_phrase, true);
-                    addConceptToExtractedMap(rumbling, gc2, ConceptType.GENERAL_CONCEPT, true);
-                    concept = concept.addGeneralConcept(end_phrase, true);
+                    addGeneralConcept(end_phrase, rumbling);
+                    concept = isIndividualConcept(end_phrase) ? concept.addGeneralConcept(end_phrase, true) : concept.addIndividualConcept(end_phrase, true);
                 }
-                addConceptToExtractedMap(rumbling, concept, ConceptType.VERB_CONCEPT, true);
+                addConceptToExtractedMap(rumbling, concept, ConceptType.VERB_CONCEPT, false);
                 return concept;
             } else if (rumbling.endsWith(gc)) {
                 String first_part = rumbling.substring(0, rumbling.length() - gc.length()).trim();
@@ -85,18 +111,33 @@ public class SimulatedAutoExtraction extends AbstractVocabularyExtractor {
                     continue;
                 // Remaining part id treated as verb phrase
                 String verb_phrase = first_part.substring(start_phrase.length()).trim();
-                SBVRExpressionModel gc1 = new SBVRExpressionModel().addGeneralConcept(start_phrase, true);
-                addConceptToExtractedMap(rumbling, gc1, ConceptType.GENERAL_CONCEPT, true);
-                SBVRExpressionModel concept = new SBVRExpressionModel().addGeneralConcept(start_phrase, true);
+                addGeneralConcept(start_phrase, rumbling);
+                SBVRExpressionModel concept = new SBVRExpressionModel();
+                concept = isIndividualConcept(start_phrase) ? concept.addGeneralConcept(start_phrase, true) : concept.addIndividualConcept(start_phrase, true);
                 if (verb_phrase.length() > 0)
                     concept = concept.addVerbConcept(verb_phrase, true);
-                SBVRExpressionModel gc2 = new SBVRExpressionModel().addGeneralConcept(gc, true);
-                addConceptToExtractedMap(rumbling, gc2, ConceptType.GENERAL_CONCEPT, true);
-                concept = concept.addGeneralConcept(gc, true);
-                addConceptToExtractedMap(rumbling, concept, ConceptType.VERB_CONCEPT, true);
+                addGeneralConcept(gc, rumbling);
+                concept = isIndividualConcept(gc) ? concept.addGeneralConcept(gc, true) : concept.addIndividualConcept(gc, true);
+                addConceptToExtractedMap(rumbling, concept, ConceptType.VERB_CONCEPT, false);
                 return concept;
             }
-        return null;
+        // NO general concept candidate was found, run typical processing
+        String[] parts = rumbling.split(" ");
+        if (parts.length == 0)
+            return null;
+        String start_phrase = parts[0].trim();
+        SBVRExpressionModel concept = new SBVRExpressionModel();
+        addGeneralConcept(start_phrase, rumbling);
+        concept = isIndividualConcept(start_phrase) ? concept.addGeneralConcept(start_phrase, true) : concept.addIndividualConcept(start_phrase, true);
+        if (parts.length > 1)
+            concept = concept.addVerbConcept(parts[1], false);
+        if (parts.length > 2) {
+            String right_gc = String.join(" ", Arrays.copyOfRange(parts, 2, parts.length));
+            addGeneralConcept(right_gc, rumbling);
+            concept = isIndividualConcept(right_gc) ? concept.addGeneralConcept(right_gc, true) : concept.addIndividualConcept(right_gc, true);
+        }
+        addConceptToExtractedMap(rumbling, concept, ConceptType.VERB_CONCEPT, false);
+        return concept;
     }
 
     @Override
@@ -108,7 +149,7 @@ public class SimulatedAutoExtraction extends AbstractVocabularyExtractor {
         Set<String> gcCandidates = filterRumblingsByType(ConceptType.GENERAL_CONCEPT);
         for (String rumbling : gcCandidates) {
             SBVRExpressionModel concept = new SBVRExpressionModel().addGeneralConcept(rumbling.replaceAll(" '", "'"), Boolean.TRUE);
-            addConceptToExtractedMap(rumbling, concept, ConceptType.GENERAL_CONCEPT, true);
+            addConceptToExtractedMap(rumbling, concept, ConceptType.GENERAL_CONCEPT, false);
         }
         // Expected verb concept entries are searched for existing general verb concepts at the beginning or end
         // As NLP techniques are not applied in automatic extraction, it is virtually impossible to extract n-ary associations, 
@@ -130,24 +171,27 @@ public class SimulatedAutoExtraction extends AbstractVocabularyExtractor {
             for (int i = 0; i < vcParts.size(); i++) {
                 String vc = vcParts.get(i);
                 SBVRExpressionModel vcModel = null;
+                search:
                 for (SBVRExpressionModel model : vcConcepts)
                     if (vc.compareToIgnoreCase(model.toString()) == 0) {
                         vcModel = model;
-                        break;
+                        break search;
                     }
+                if (vcModel == null)
+                    vcModel = processVCRumbling(vc);
                 if (vcModel != null)
-                    addConceptToExtractedMap(rumbling, vcModel, ConceptType.VERB_CONCEPT, true);
+                    addConceptToExtractedMap(rumbling, vcModel, ConceptType.VERB_CONCEPT, false);
                 brModel.addVerbConcept(vc, true);
                 if (i == 0)
                     brModel.addIfExpression();
-                else 
-                    brModel.addAndExpression();  // Should be improved to account for or expressions as well
+                else
+                    brModel.addAndExpression(); // Should be improved to account for or expressions as well
             }
             // Remove last entry from the model, if it is an ExpressionType
             if (brModel.getExpressionType(brModel.length() - 1) == ExpressionType.RULE_AND)
                 brModel.remove(brModel.length() - 1);
+            addConceptToExtractedMap(rumbling, brModel, ConceptType.BUSINESS_RULE, false);
         }
-
     }
 
 }
