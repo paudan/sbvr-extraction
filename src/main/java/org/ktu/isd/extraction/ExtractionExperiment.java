@@ -66,11 +66,11 @@ public class ExtractionExperiment {
         this.extractor = extractor;
     }
 
-    static class EvaluationResult {
+    public static class EvaluationResult {
 
-        String rumbling;
-        int[][] counts;
-        double[][] ratios;
+        public String rumbling;
+        public int[][] counts;
+        public double[][] ratios;
 
         public EvaluationResult(String rumbling) {
             this.rumbling = rumbling;
@@ -117,7 +117,7 @@ public class ExtractionExperiment {
 
     }
 
-    public void perform() throws InitializationException {
+    public EvaluationResult perform() throws InitializationException {
         if (extractor instanceof StepwiseCascadedExtractor)
             ((StepwiseCascadedExtractor) extractor).setReplaceSynonyms(false);
         extractor.setRumblings(rumblings);
@@ -177,6 +177,7 @@ public class ExtractionExperiment {
         macroResult.counts = macroCounts;
         macroResult.ratios = macroResults;
         System.out.println(macroResult);
+        return macroResult;
     }
 
     public void setActualConcepts(Map<String, Map<String, ConceptType>> actualConcepts) {

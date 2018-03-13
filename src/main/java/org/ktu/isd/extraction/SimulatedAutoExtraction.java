@@ -5,7 +5,6 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import net.tmine.entities.InitializationException;
@@ -82,7 +81,7 @@ public class SimulatedAutoExtraction extends AbstractVocabularyExtractor {
         rumbling = rumbling.trim();
         if (rumbling.trim().length() == 0)
             return null;
-        Set<String> gcCandidates = filterRumblingsByType(ConceptType.GENERAL_CONCEPT);
+        List<String> gcCandidates = filterRumblingsByType(ConceptType.GENERAL_CONCEPT);
         for (String gc : gcCandidates)
             if (rumbling.startsWith(gc)) {
                 String last_part = rumbling.substring(gc.length()).trim();
@@ -146,7 +145,7 @@ public class SimulatedAutoExtraction extends AbstractVocabularyExtractor {
             return;
         clearResultStructures();
         // Expected general concept entries are automatically mapped to SBVR general concepts
-        Set<String> gcCandidates = filterRumblingsByType(ConceptType.GENERAL_CONCEPT);
+        List<String> gcCandidates = filterRumblingsByType(ConceptType.GENERAL_CONCEPT);
         for (String rumbling : gcCandidates) {
             SBVRExpressionModel concept = new SBVRExpressionModel().addGeneralConcept(rumbling.replaceAll(" '", "'"), Boolean.TRUE);
             addConceptToExtractedMap(rumbling, concept, ConceptType.GENERAL_CONCEPT, false);
@@ -154,12 +153,12 @@ public class SimulatedAutoExtraction extends AbstractVocabularyExtractor {
         // Expected verb concept entries are searched for existing general verb concepts at the beginning or end
         // As NLP techniques are not applied in automatic extraction, it is virtually impossible to extract n-ary associations, 
         // thus simplified processing is applied
-        Set<String> vcCandidates = filterRumblingsByType(ConceptType.VERB_CONCEPT);
+        List<String> vcCandidates = filterRumblingsByType(ConceptType.VERB_CONCEPT);
         for (String rumbling : vcCandidates)
             processVCRumbling(rumbling);
         // Finally, business rules parsing is performed
         // They are relatively structurized during the auto extraction step, thus parsing is more relevant only for "verb concept" parts
-        Set<String> brCandidates = filterRumblingsByType(ConceptType.BUSINESS_RULE);
+        List<String> brCandidates = filterRumblingsByType(ConceptType.BUSINESS_RULE);
         Collection<SBVRExpressionModel> vcConcepts = getExtractedVerbConcepts();
         for (String rumbling : brCandidates) {
             Object[] processed = processBRRumbling(rumbling);

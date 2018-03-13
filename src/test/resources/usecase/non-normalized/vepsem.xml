@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <experiment_case>
     <case_name>VEPSEM UseCase model (modified)</case_name>
-    <normalize>true</normalize>
+    <normalize>false</normalize>
     <source>
         <rumbling expected="gc">car reservation</rumbling>
         <rumbling expected="gc">rental manager's assistant</rumbling>

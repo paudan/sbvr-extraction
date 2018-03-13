@@ -16,7 +16,11 @@
 
 package org.ktu.isd.extraction;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -135,5 +139,14 @@ public class SimulatedAutoExtractionTest {
         String parts[] = rumbling.split(" ");
         assertEquals(1, parts.length);
         assertEquals("test", parts[0]);
+    }
+    
+    @Test
+    public void testSortedList() {
+        Set<String> items = new HashSet<>(Arrays.asList("project manager", "project", "developer", "project developer", "project managing person"));
+        List<String> list = new ArrayList<>(items);
+        Collections.sort(list, AbstractVocabularyExtractor.getDefaultComparator());
+        assertEquals(list.get(0), "project managing person");
+        assertEquals(list.get(1), "project developer");
     }
 }

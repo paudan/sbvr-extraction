@@ -1,9 +1,11 @@
 package org.ktu.isd.extraction;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.TreeMap;
@@ -38,7 +40,7 @@ abstract public class AbstractVocabularyExtractor implements VocabularyExtractor
     
     protected void initialize() {
         // Must enforce to set longer phrases at the beginning of the list
-        Comparator<String> lenComparator = this.getDefaultComparator();
+        Comparator<String> lenComparator = AbstractVocabularyExtractor.getDefaultComparator();
         generalConcepts = new TreeMap<>(lenComparator);
         individualConcepts = new TreeMap<>(lenComparator);
         verbConcepts = new TreeMap<>(lenComparator);
@@ -46,7 +48,7 @@ abstract public class AbstractVocabularyExtractor implements VocabularyExtractor
         mapExtracted = new HashMap<>();
     }
     
-    protected Comparator<String> getDefaultComparator() {
+    public static Comparator<String> getDefaultComparator() {
         return (String s1, String s2) -> {
             if (s1.length() > s2.length())
                 return -1;
@@ -122,10 +124,13 @@ abstract public class AbstractVocabularyExtractor implements VocabularyExtractor
         }
     }
     
-    protected Set<String> filterRumblingsByType(ConceptType conceptType) {
-        return rumblings.entrySet().stream()
+    protected List<String> filterRumblingsByType(ConceptType conceptType) {
+        Set<String> filtered = rumblings.entrySet().stream()
            .filter(map -> map.getValue().equals(conceptType) && map.getKey().trim().length() > 0)
            .collect(Collectors.toMap(p -> p.getKey(), p -> p.getValue())).keySet();
+        List<String> items = new ArrayList<>(filtered);
+        Collections.sort(items, getDefaultComparator());
+        return items;
     }
     
 }
