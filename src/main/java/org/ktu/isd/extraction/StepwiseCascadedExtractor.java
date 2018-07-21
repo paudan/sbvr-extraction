@@ -66,7 +66,7 @@ public class StepwiseCascadedExtractor extends AbstractVocabularyExtractor {
     protected static final String ADJ_COND = "[ADJ]|" + CHAR_COND;
     protected static final String GC_SINGLE_COND = "[NN]|[VBG]|[POS]|[RBS]|[FW]";
     protected static final String GC_COND = String.format("%s|[%s]", GC_SINGLE_COND, POS_GC_MULTIPLE);
-    protected static final String IC_SINGLE_COND = "[NNP][POS]|[CD]";
+    protected static final String IC_SINGLE_COND = "[NNP]|[POS]|[CD]";
     protected static final String IC_COND = String.format("%s|[%s]", IC_SINGLE_COND, POS_IC_MULTIPLE);
     protected static final String VERB_FORM = String.format("[%s]", String.join("]|[", TAGS_VERB));
     protected static final String VERB_COND = VERB_FORM + "|" + PREP_COND;

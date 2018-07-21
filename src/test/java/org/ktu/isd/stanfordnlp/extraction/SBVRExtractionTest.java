@@ -189,9 +189,9 @@ public class SBVRExtractionTest {
         Collection<SBVRExpressionModel> individualConcepts = extractor.getExtractedIndividualConcepts();
         Collection<SBVRExpressionModel> verbConcepts = extractor.getExtractedVerbConcepts();
         Collection<SBVRExpressionModel> businessRules = extractor.getExtractedBusinessRules();
-        assertEquals(17, generalConcepts.size());
+        assertEquals(15, generalConcepts.size());
         assertEquals(1, individualConcepts.size());
-        assertEquals(18, verbConcepts.size());
+        assertEquals(19, verbConcepts.size());
         assertEquals(13, businessRules.size());
     }
 
@@ -205,7 +205,7 @@ public class SBVRExtractionTest {
         Collection<SBVRExpressionModel> individualConcepts = extractor.getExtractedIndividualConcepts();
         Collection<SBVRExpressionModel> verbConcepts = extractor.getExtractedVerbConcepts();
         Collection<SBVRExpressionModel> businessRules = extractor.getExtractedBusinessRules();
-        assertEquals(17, generalConcepts.size());
+        assertEquals(15, generalConcepts.size());
         assertEquals(1, individualConcepts.size());
         assertEquals(19, verbConcepts.size());
         assertEquals(13, businessRules.size());
@@ -222,9 +222,10 @@ public class SBVRExtractionTest {
         Collection<SBVRExpressionModel> individualConcepts = extractor.getExtractedIndividualConcepts();
         Collection<SBVRExpressionModel> verbConcepts = extractor.getExtractedVerbConcepts();
         Collection<SBVRExpressionModel> businessRules = extractor.getExtractedBusinessRules();
-        assertEquals(15, generalConcepts.size());
+        assertEquals(13, generalConcepts.size());
         assertEquals(1, individualConcepts.size());
-        assertEquals(15, verbConcepts.size());
+        System.out.println(verbConcepts);
+        assertEquals(16, verbConcepts.size());
         assertEquals(13, businessRules.size());
     }
 

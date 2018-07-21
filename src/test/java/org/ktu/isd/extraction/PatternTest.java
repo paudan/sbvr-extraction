@@ -23,6 +23,7 @@ import java.util.regex.Pattern;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import org.junit.Test;
+import static org.ktu.isd.extraction.StepwiseCascadedExtractor.PATTERN_COMBINED_VC;
 
 public class PatternTest {
 
@@ -127,6 +128,12 @@ public class PatternTest {
 
         m = r.matcher("[CGC]");
         assertTrue(m.matches());
+        
+        m = r.matcher("[NNP]");
+        assertTrue(m.matches());
+        
+        m = r.matcher("[NNP][NN]");
+        assertTrue(m.matches());
     }
 
     @Test
@@ -160,7 +167,6 @@ public class PatternTest {
     @Test
     public void testGetPATTERN_BINARY_VC() {
         Pattern r = getPattern("PATTERN_BINARY_VC");
-        System.out.println(r.pattern());
         Matcher m = r.matcher("[CGC][VB][NN]");
         assertTrue(m.matches());
 
@@ -172,12 +178,19 @@ public class PatternTest {
         
         m = r.matcher("[CIC][VB][NN][NN]");
         assertTrue(m.matches());
+        
+        m = r.matcher("[NNP][VBD][IN][CGC]");
+        assertTrue(m.matches());
+        assertTrue(r.asPredicate().test("[NNP][VBD][IN][CGC]"));
     }
     
     @Test
     public void testGetPATTERN_BR() {
-        Pattern r = getPattern("PATTERN_BR");
-        System.out.println(r.pattern());
+        // Taken from initOverrides() method
+        String br_recognized = String.format("([RULE_TAG1]|[RULE_TAG2]|[RULE_TAG3]|[RULE_TAG4]){1}[WDT](%s)([IF_TAG](%s))*([CC]%s)*",
+                PATTERN_COMBINED_VC, PATTERN_COMBINED_VC, PATTERN_COMBINED_VC);
+        Pattern r = Pattern.compile(String.format("^(%s)$", br_recognized).replaceAll("\\[", "\\\\[").replaceAll("\\]", "\\\\]"));
+//        Pattern r = getPattern("PATTERN_BR");
         Matcher m = r.matcher("[RULE_TAG1][WDT][CIC][VBP][CGC][IF_TAG][CGC][VBP][CGC]");
         assertTrue(m.matches());
         m = r.matcher("[RULE_TAG1][WDT][CGC][VB][CGC][IF_TAG][CGC][VBP][CGC]");
@@ -193,4 +206,5 @@ public class PatternTest {
         m = r.matcher("[CGC][VBP][CGC]");
         assertTrue(m.matches());
     }
+    
 }

@@ -13,14 +13,14 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.ktu.isd.stanfordnlp.extraction;
+package org.ktu.isd.extraction;
 
 import java.lang.reflect.Field;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import static org.junit.Assert.assertEquals;
 import org.junit.Test;
-import org.ktu.isd.extraction.StepwiseCascadedExtractor;
+import org.ktu.isd.stanfordnlp.extraction.SBVRExtractionTest;
 
 public class TestProcessing {
 
@@ -29,8 +29,7 @@ public class TestProcessing {
         try {
             Field field = StepwiseCascadedExtractor.class.getDeclaredField("PATTERN_GC");
             field.setAccessible(true);
-            System.out.println(field.get(null).toString().replaceAll("\\[", "\\\\["));
-            assertEquals("([CGC]|[CIC]){1}([VB]|[VBD]|[VBG]|[VBN]|[VBP]|[VBZ]|[RB]|[RBR]|[RP]|[IN]|TO)+([JJ]|[JJR]|[JJS])*", field.get(null));
+            assertEquals("([ADJ]|[JJ]|[JJR]|[JJS])*([NNP]|[POS]|[CD]|[NNPS])*([NN]|[VBG]|[POS]|[RBS]|[FW]|[NNS])+", field.get(null));
         } catch (SecurityException | IllegalArgumentException ex) {
             Logger.getLogger(SBVRExtractionTest.class.getName()).log(Level.SEVERE, null, ex);
         } catch (NoSuchFieldException | IllegalAccessException ex) {
@@ -43,7 +42,7 @@ public class TestProcessing {
         try {
             Field field = StepwiseCascadedExtractor.class.getDeclaredField("PATTERN_UNARY_VC");
             field.setAccessible(true);
-            assertEquals("([CGC]|[CIC]){1}([VB]|[VBD]|[VBG]|[VBN]|[VBP]|[VBZ]|[RB]|[RBR]|[RP]|[IN]|TO)+([JJ]|[JJR]|[JJS])*", field.get(null));
+            assertEquals("(([CGC]|[CIC]){1}|([ADJ]|[JJ]|[JJR]|[JJS])*([NN]|[VBG]|[POS]|[RBS]|[FW]|[NNS]|[NNP]|[POS]|[CD]|[NNPS])+){1}([VB]|[VBD]|[VBG]|[VBN]|[VBP]|[VBZ]|[RB]|[RBR]|[RP]|[TO]|[IN]|[PREP])+([JJ]|[JJR]|[JJS])*", field.get(null));
         } catch (SecurityException | IllegalArgumentException ex) {
             Logger.getLogger(SBVRExtractionTest.class.getName()).log(Level.SEVERE, null, ex);
         } catch (NoSuchFieldException | IllegalAccessException ex) {
@@ -56,7 +55,9 @@ public class TestProcessing {
         try {
             Field field = StepwiseCascadedExtractor.class.getDeclaredField("PATTERN_BINARY_VC");
             field.setAccessible(true);
-            assertEquals("([CGC]|[CIC]){1}([VB]|[VBD]|[VBG]|[VBN]|[VBP]|[VBZ]|[RB]|[RBR]|[RP]|[IN]|[TO])+([JJ]|[JJR]|[JJS])*([CGC]|[CIC]){1}", field.get(null));
+            assertEquals("((([CGC]|[CIC]){1}|([ADJ]|[JJ]|[JJR]|[JJS])*([NN]|[VBG]|[POS]|[RBS]|[FW]|[NNS]|[NNP]|[POS]|[CD]|[NNPS])+){1}"
+                    + "([VB]|[VBD]|[VBG]|[VBN]|[VBP]|[VBZ]|[RB]|[RBR]|[RP]|[TO]|[IN]|[PREP])+([JJ]|[JJR]|[JJS])*){1}"
+                    + "(([CGC]|[CIC]){1}|([ADJ]|[JJ]|[JJR]|[JJS])*([NN]|[VBG]|[POS]|[RBS]|[FW]|[NNS]|[NNP]|[POS]|[CD]|[NNPS])+){1}", field.get(null));
         } catch (SecurityException | IllegalArgumentException ex) {
             Logger.getLogger(SBVRExtractionTest.class.getName()).log(Level.SEVERE, null, ex);
         } catch (NoSuchFieldException | IllegalAccessException ex) {
@@ -69,8 +70,10 @@ public class TestProcessing {
         try {
             Field field = StepwiseCascadedExtractor.class.getDeclaredField("PATTERN_MULTINARY_VC");
             field.setAccessible(true);
-            System.out.println(field.get(null).toString().replaceAll("\\[", "\\\\["));
-            assertEquals("(([CGC]|[CIC]){1}([VB]|[VBD]|[VBG]|[VBN]|[VBP]|[VBZ]|[RB]|[RBR]|[RP]|[IN]|[TO])+([JJ]|[JJR]|[JJS])*){2,}([CGC]|[CIC])*", field.get(null));
+            System.out.println(field.get(null));
+            assertEquals("((([CGC]|[CIC]){1}|([ADJ]|[JJ]|[JJR]|[JJS])*([NN]|[VBG]|[POS]|[RBS]|[FW]|[NNS]|[NNP]|[POS]|[CD]|[NNPS])+){1}"
+                    + "([VB]|[VBD]|[VBG]|[VBN]|[VBP]|[VBZ]|[RB]|[RBR]|[RP]|[TO]|[IN]|[PREP])+([JJ]|[JJR]|[JJS])*){2,}"
+                    + "(([CGC]|[CIC]){1}|([ADJ]|[JJ]|[JJR]|[JJS])*([NN]|[VBG]|[POS]|[RBS]|[FW]|[NNS]|[NNP]|[POS]|[CD]|[NNPS])+){1}", field.get(null));
         } catch (SecurityException | IllegalArgumentException ex) {
             Logger.getLogger(SBVRExtractionTest.class.getName()).log(Level.SEVERE, null, ex);
         } catch (NoSuchFieldException | IllegalAccessException ex) {
