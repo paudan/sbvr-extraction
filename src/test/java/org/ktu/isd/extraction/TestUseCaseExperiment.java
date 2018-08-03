@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.ktu.isd.stanfordnlp.extraction;
+package org.ktu.isd.extraction;
 
 import java.io.File;
 import java.net.URL;
@@ -23,28 +23,17 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import net.tmine.entities.InitializationException;
-import net.tmine.stanfordnlp.entities.SentenceFactory;
-import net.tmine.stanfordnlp.processing.NamedEntityFinder;
 import org.junit.Test;
-import org.ktu.isd.extraction.ExtractionExperiment;
 import org.ktu.isd.extraction.ExtractionExperiment.EvaluationResult;
 import org.ktu.isd.extraction.ExtractionExperiment.ExperimentConfigException;
-import org.ktu.isd.extraction.SimpleCascadedExtractor;
-import org.ktu.isd.extraction.SimulatedAutoExtraction;
-import org.ktu.isd.extraction.StepwiseCascadedExtractor;
-import org.ktu.isd.extraction.VocabularyExtractor;
+import org.ktu.isd.tagging.Taggers;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class TestUseCaseExperiment {
-    
-    private VocabularyExtractor[] extractors = {
-        new StepwiseCascadedExtractor(NamedEntityFinder.getInstance(), SentenceFactory.getInstance()),
-        new SimpleCascadedExtractor(NamedEntityFinder.getInstance(), SentenceFactory.getInstance()),
-        new SimulatedAutoExtraction()
-    };
-    
+
     private class ExtractorOutput {
+
         String model;
         Double[] scores;
 
@@ -53,7 +42,7 @@ public class TestUseCaseExperiment {
             this.scores = scores;
         }
     }
-    
+
     private ExtractorOutput runExperimentWithModel(String xmlPath, VocabularyExtractor extractor) {
         ClassLoader classLoader = TestUseCaseExperiment.class.getClassLoader();
         URL urlScores = classLoader.getResource("usecase/normalized/" + xmlPath);
@@ -63,8 +52,8 @@ public class TestUseCaseExperiment {
             logger.info("Running extractor " + extractor.getClass().getSimpleName());
             logger.info(experiment.getCaseName() + ", normalization: " + experiment.isNormalize());
             EvaluationResult result = experiment.perform();
-            return new ExtractorOutput(experiment.getCaseName(), 
-                    new Double[] {result.ratios[0][3], result.ratios[0][5], result.ratios[2][3], result.ratios[2][5], 
+            return new ExtractorOutput(experiment.getCaseName(),
+                    new Double[]{result.ratios[0][3], result.ratios[0][5], result.ratios[2][3], result.ratios[2][5],
                         result.ratios[3][3], result.ratios[3][5]});
         } catch (ExperimentConfigException | InitializationException ex) {
             logger.error(ex.toString());
@@ -72,10 +61,9 @@ public class TestUseCaseExperiment {
         return null;
     }
 
-    @Test
-    public void testUseCaseModels() {
+    private void runUseCaseExtractionExperiment(VocabularyExtractor[] extractors) {
         Map<String, List<ExtractorOutput>> fullResults = new HashMap<>();
-        for (VocabularyExtractor extractor: extractors) {
+        for (VocabularyExtractor extractor : extractors) {
             List<ExtractorOutput> extractorResults = new ArrayList<>();
             extractorResults.add(runExperimentWithModel("vepsem.xml", extractor));
             extractorResults.add(runExperimentWithModel("elements_of_style_1.xml", extractor));
@@ -91,11 +79,11 @@ public class TestUseCaseExperiment {
             fullResults.put(extractor.getClass().getSimpleName(), extractorResults);
         }
         StringBuilder builder = new StringBuilder();
-        for (Entry<String, List<ExtractorOutput>> extractorPerf: fullResults.entrySet()) {
+        for (Entry<String, List<ExtractorOutput>> extractorPerf : fullResults.entrySet()) {
             builder.append(extractorPerf.getKey()).append("\n");
             builder.append("Model\tGC\t\tVC\t\tBR\t\t\n");
             builder.append("\tPrec\tF-Score\tPrec\tF-Score\tPrec\tF-Score\t\n");
-            for (ExtractorOutput output: extractorPerf.getValue()) {
+            for (ExtractorOutput output : extractorPerf.getValue()) {
                 builder.append(output.model).append("\t");
                 for (int i = 0; i < 6; i++)
                     builder.append(String.format("%.3f\t", output.scores[i]));
@@ -105,4 +93,40 @@ public class TestUseCaseExperiment {
         }
         System.out.println(builder.toString());
     }
+
+    @Test
+    public void testUseCaseModelsStanford() {
+        VocabularyExtractor[] extractors = {
+            new StepwiseCascadedExtractor(net.tmine.stanfordnlp.processing.NamedEntityFinder.getInstance(), 
+                    net.tmine.stanfordnlp.entities.SentenceFactory.getInstance()),
+            new SimpleCascadedExtractor(net.tmine.stanfordnlp.processing.NamedEntityFinder.getInstance(), 
+                    net.tmine.stanfordnlp.entities.SentenceFactory.getInstance()),
+            new SimulatedAutoExtraction()
+        };
+        runUseCaseExtractionExperiment(extractors);
+    }
+    
+    @Test
+    public void testUseCaseModelsOpenNLP() {
+        net.tmine.opennlp.processing.NamedEntityFinder finder = new net.tmine.opennlp.processing.NamedEntityFinder();
+        net.tmine.opennlp.entities.SentenceFactory sentFactory = net.tmine.opennlp.entities.SentenceFactory.getInstance();
+        net.tmine.opennlp.processing.MaxEntropyPOSTagger tagger = net.tmine.opennlp.processing.MaxEntropyPOSTagger.getInstance();
+        StepwiseCascadedExtractor stepwise = new StepwiseCascadedExtractor(finder, sentFactory);
+        stepwise.setTagger(tagger);
+        SimpleCascadedExtractor simple = new SimpleCascadedExtractor(finder, sentFactory);
+        simple.setTagger(tagger);
+        runUseCaseExtractionExperiment(new VocabularyExtractor[]{stepwise, simple});
+    }   
+    
+    @Test
+    public void testUseCaseModelsWithCustomTagger() {
+        net.tmine.opennlp.processing.NamedEntityFinder finder = new net.tmine.opennlp.processing.NamedEntityFinder();
+        net.tmine.opennlp.entities.SentenceFactory sentFactory = net.tmine.opennlp.entities.SentenceFactory.getInstance();
+        StepwiseCascadedExtractor stepwise = new StepwiseCascadedExtractor(finder, sentFactory);
+        stepwise.setTagger(Taggers.getCustomMaxentTagger());
+        SimpleCascadedExtractor simple = new SimpleCascadedExtractor(finder, sentFactory);
+        simple.setTagger(Taggers.getCustomMaxentTagger());
+        runUseCaseExtractionExperiment(new VocabularyExtractor[]{stepwise, simple});
+    }   
+
 }

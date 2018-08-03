@@ -32,6 +32,11 @@
             <artifactId>stanford-nlp</artifactId>
             <version>1.0</version>
         </dependency>
+        <dependency>
+            <groupId>paudan.tmine</groupId>
+            <artifactId>opennlp</artifactId>
+            <version>1.0</version>
+        </dependency>
     </dependencies>
         <build> 
         <plugins>
@@ -50,6 +55,18 @@
                             <url>http://wordnetcode.princeton.edu/3.0/WordNet-3.0.tar.gz</url>
                             <unpack>true</unpack>
                             <outputDirectory>${wordnet.path}</outputDirectory>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>acronyms</id>
+                        <phase>process-resources</phase>
+                        <goals>
+                            <goal>wget</goal>
+                        </goals>
+                        <configuration>
+                            <url>https://github.com/richardwilly98/elasticsearch-opennlp-auto-tagging/raw/master/src/main/resources/models/en-lemmatizer.dict</url>
+                            <unpack>false</unpack>
+                            <outputDirectory>../data</outputDirectory>
                         </configuration>
                     </execution>
                 </executions>

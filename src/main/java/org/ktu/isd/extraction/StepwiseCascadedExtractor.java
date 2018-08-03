@@ -294,7 +294,7 @@ public class StepwiseCascadedExtractor extends AbstractVocabularyExtractor {
                 List<Entity> entities = new ArrayList<>(w.getEntities());
                 // Some concepts (like U.S.A) might still be recognized as GC, must use NER
                 if (entities.isEmpty())
-                    entities.addAll(finder.findAllEntities(sentFactory.createSentence(w.getToken())));
+                    entities.addAll(finder.findAllEntities(sentFactory.createSentence(w.getToken(), tagger, false, null)));
                 // If the word is part of any NER set its POS as [NNP]
                 if (!entities.isEmpty() && !Stream.of(entities.toArray(new Entity[]{}))
                         .anyMatch(e -> e.getEntityType().equals(EntityType.GENERAL)))
@@ -360,7 +360,7 @@ public class StepwiseCascadedExtractor extends AbstractVocabularyExtractor {
         List<ProcessedStructure> updated = new LinkedList<>();
         // Add general concepts
         for (String str : gcCandidates) {
-            Sentence sent = sentFactory.createSentence(str, false, "NN");
+            Sentence sent = sentFactory.createSentence(str, tagger, false, "NN");
             sent = preprocessSentence(sent);
             updated.add(new ProcessedStructure(str, sent, ConceptType.GENERAL_CONCEPT));
         }
@@ -384,7 +384,7 @@ public class StepwiseCascadedExtractor extends AbstractVocabularyExtractor {
                 replacement = replacement.replaceAll(String.format("(?i)%s ", substr),
                         String.format("0%s0 ", overrides.get(substr)));
             }
-            Sentence sent = sentFactory.createSentence(replacement);
+            Sentence sent = sentFactory.createSentence(replacement, tagger, false, null);
             sent = preprocessSentence(sent);
             // Replace overrides with their tags
             for (Word wrd : sent) {
@@ -402,7 +402,7 @@ public class StepwiseCascadedExtractor extends AbstractVocabularyExtractor {
         for (Entry<String, Set<SBVRExpressionModel>> rumblingEntry : conceptsByRumbling.entrySet())
             for (SBVRExpressionModel concept : rumblingEntry.getValue()) {
                 String conceptName = concept.toString();
-                Sentence sent = sentFactory.createSentence(concept.getExpressionElement(0));
+                Sentence sent = sentFactory.createSentence(concept.getExpressionElement(0), tagger, false, null);
                 sent = preprocessSentence(sent);
                 String tagString = sent.getTagString();
                 boolean matched = false;
@@ -486,7 +486,7 @@ public class StepwiseCascadedExtractor extends AbstractVocabularyExtractor {
         // Remove duplicates
         Set<String> rumblingSet = new HashSet<>(rumblings);
         for (String rumbling : rumblingSet) {
-            Sentence sent = sentFactory.createSentence(rumbling, true);
+            Sentence sent = sentFactory.createSentence(rumbling, tagger, true, null);
             if (normalize) {
                 // Normalize last noun
                 Word last = sent.get(sent.size() - 1);
@@ -894,7 +894,7 @@ public class StepwiseCascadedExtractor extends AbstractVocabularyExtractor {
                         QuantifierType quantifier = QuantifierType.QUANTIFIER_SINGLE;
                         if (i < cand.originalToken.size()) {
                             String conceptAsOriginal = cand.originalToken.get(i);
-                            String origTagString = sentFactory.createSentence(conceptAsOriginal, true).getTagString();
+                            String origTagString = sentFactory.createSentence(conceptAsOriginal, tagger, true, null).getTagString();
                             quantifier = getQuantifier(origTagString);
                         }
                         addConceptToExtractedMap(entry, sbvr, ConceptType.GENERAL_CONCEPT, false);
