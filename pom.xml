@@ -3,7 +3,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>org.ktu.isd</groupId>
     <artifactId>SBVRExtraction</artifactId>
-    <version>1.0-SNAPSHOT</version>
+    <version>1.0</version>
     <packaging>jar</packaging>
     <dependencies>
         <dependency>
@@ -38,7 +38,7 @@
             <version>1.0</version>
         </dependency>
     </dependencies>
-        <build> 
+    <build> 
         <plugins>
             <plugin>
                 <groupId>com.googlecode.maven-download-plugin</groupId>
@@ -64,7 +64,19 @@
                             <goal>wget</goal>
                         </goals>
                         <configuration>
-                            <url>https://github.com/richardwilly98/elasticsearch-opennlp-auto-tagging/raw/master/src/main/resources/models/en-lemmatizer.dict</url>
+                            <url>https://github.com/paudan/tmine/blob/master/data/en-lemmatizer.dict</url>
+                            <unpack>false</unpack>
+                            <outputDirectory>../data</outputDirectory>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>stopwords</id>
+                        <phase>process-resources</phase>
+                        <goals>
+                            <goal>wget</goal>
+                        </goals>
+                        <configuration>
+                            <url>https://github.com/paudan/tmine/blob/master/data/stopwords.txt</url>
                             <unpack>false</unpack>
                             <outputDirectory>../data</outputDirectory>
                         </configuration>
@@ -103,15 +115,15 @@
                         <configuration>
                             <target>
                                 <delete dir="${wordnet.path}/WordNet-3.0"/>
-                                <move file="${wordnet.path}/data.adj" tofile="${wordnet.path}/data.adj" />
-                                <move file="${wordnet.path}/data.adv" tofile="${wordnet.path}/data.adv" />
-                                <move file="${wordnet.path}/data.noun" tofile="${wordnet.path}/data.noun" />
-                                <move file="${wordnet.path}/data.verb" tofile="${wordnet.path}/data.verb" />
-                                <move file="${wordnet.path}/index.adj" tofile="${wordnet.path}/index.adj" />
-                                <move file="${wordnet.path}/index.adv" tofile="${wordnet.path}/index.adv" />
-                                <move file="${wordnet.path}/index.noun" tofile="${wordnet.path}/index.noun" />
-                                <move file="${wordnet.path}/index.sense" tofile="${wordnet.path}/index.sense" />
-                                <move file="${wordnet.path}/index.verb" tofile="${wordnet.path}/index.verb" />
+                                <move file="${wordnet.path}/data.adj" tofile="${wordnet.path}/adj.dat" />
+                                <move file="${wordnet.path}/data.adv" tofile="${wordnet.path}/adv.dat" />
+                                <move file="${wordnet.path}/data.noun" tofile="${wordnet.path}/noun.dat" />
+                                <move file="${wordnet.path}/data.verb" tofile="${wordnet.path}/verb.dat" />
+                                <move file="${wordnet.path}/index.adj" tofile="${wordnet.path}/adj.idx" />
+                                <move file="${wordnet.path}/index.adv" tofile="${wordnet.path}/adv.idx" />
+                                <move file="${wordnet.path}/index.noun" tofile="${wordnet.path}/noun.idx" />
+                                <move file="${wordnet.path}/index.sense" tofile="${wordnet.path}/sense.idx" />
+                                <move file="${wordnet.path}/index.verb" tofile="${wordnet.path}/verb.idx" />
                             </target>
                         </configuration>
                         <goals>
@@ -120,6 +132,14 @@
                     </execution>
                 </executions>
             </plugin>
+            <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-surefire-plugin</artifactId>
+            <version>2.12.4</version>
+            <configuration>
+                <printSummary>true</printSummary>
+            </configuration>
+        </plugin>
         </plugins>
     </build>
     <properties>
@@ -129,3 +149,4 @@
         <wordnet.path>../dict</wordnet.path>
     </properties>
 </project>
+

@@ -218,7 +218,7 @@ public class StepwiseCascadedExtractor extends AbstractVocabularyExtractor {
         this.finder = finder;
         this.sentFactory = factory;
         // Must enforce to set longer phrases at the beginning of the list
-        wrongPosReplacements = new TreeMap<>(this.getDefaultComparator());
+        wrongPosReplacements = new TreeMap<>(StepwiseCascadedExtractor.getDefaultComparator());
         initOverrides();
     }
     
@@ -1045,8 +1045,8 @@ public class StepwiseCascadedExtractor extends AbstractVocabularyExtractor {
     protected void tagWithRecognizedBR_2(ProcessedStructure cand) {
         Pattern pattern = getCompiledPattern(PATTERN_BR_2);
         List<String> tags = cand.getPosList();
-        List<String> rumblings = cand.getTokenList();
-        if (tags == null || rumblings == null)
+        List<String> rumblings_ = cand.getTokenList();
+        if (tags == null || rumblings_ == null)
             return;
         String tagString = cand.getTagString();
         if (!pattern.asPredicate().test(tagString))
@@ -1065,7 +1065,7 @@ public class StepwiseCascadedExtractor extends AbstractVocabularyExtractor {
             for (int i = 0; i < posBracket.size(); i++)
                 if (posBracket.get(i) > prev_to && posBracket.get(i) < m.start()) {
                     newPos.add(tags.get(i));
-                    newToken.add(rumblings.get(i));
+                    newToken.add(rumblings_.get(i));
                     origToken.add(cand.originalToken.get(i));
                 }
             StringBuilder candEntry = new StringBuilder();
@@ -1076,7 +1076,7 @@ public class StepwiseCascadedExtractor extends AbstractVocabularyExtractor {
             for (int i = 0; i < posBracket.size(); i++)
                 if (posBracket.get(i) > m.start() && posBracket.get(i) < m.end()) {
                     brTags.add(tags.get(i));
-                    String candToAdd = rumblings.get(i);
+                    String candToAdd = rumblings_.get(i);
                     brRumblings.add(candToAdd);
                     if (tags.get(i).equals(RECOGNIZED_BR)) {
                         SBVRExpressionModel sbvr = identifiedByEntry.get(candToAdd);
@@ -1122,7 +1122,7 @@ public class StepwiseCascadedExtractor extends AbstractVocabularyExtractor {
         for (int i = 0; i < posBracket.size(); i++)
             if (posBracket.get(i) > prev_to) {
                 newPos.add(tags.get(i));
-                newToken.add(rumblings.get(i));
+                newToken.add(rumblings_.get(i));
                 origToken.add(cand.originalToken.get(i));
             }
         cand.candPos = newPos;

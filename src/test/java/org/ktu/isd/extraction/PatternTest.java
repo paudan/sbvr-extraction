@@ -23,7 +23,6 @@ import java.util.regex.Pattern;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import org.junit.Test;
-import static org.ktu.isd.extraction.StepwiseCascadedExtractor.PATTERN_COMBINED_VC;
 
 public class PatternTest {
 
@@ -188,7 +187,7 @@ public class PatternTest {
     public void testGetPATTERN_BR() {
         // Taken from initOverrides() method
         String br_recognized = String.format("([RULE_TAG1]|[RULE_TAG2]|[RULE_TAG3]|[RULE_TAG4]){1}[WDT](%s)([IF_TAG](%s))*([CC]%s)*",
-                PATTERN_COMBINED_VC, PATTERN_COMBINED_VC, PATTERN_COMBINED_VC);
+                StepwiseCascadedExtractor.PATTERN_COMBINED_VC, StepwiseCascadedExtractor.PATTERN_COMBINED_VC, StepwiseCascadedExtractor.PATTERN_COMBINED_VC);
         Pattern r = Pattern.compile(String.format("^(%s)$", br_recognized).replaceAll("\\[", "\\\\[").replaceAll("\\]", "\\\\]"));
 //        Pattern r = getPattern("PATTERN_BR");
         Matcher m = r.matcher("[RULE_TAG1][WDT][CIC][VBP][CGC][IF_TAG][CGC][VBP][CGC]");

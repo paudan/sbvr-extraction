@@ -44,12 +44,12 @@ public class TestUseCaseExperiment {
     }
 
     private ExtractorOutput runExperimentWithModel(String xmlPath, VocabularyExtractor extractor) {
-        ClassLoader classLoader = TestUseCaseExperiment.class.getClassLoader();
+        ClassLoader classLoader = getClass().getClassLoader();
         URL urlScores = classLoader.getResource("usecase/normalized/" + xmlPath);
-        Logger logger = LoggerFactory.getLogger(TestUseCaseExperiment.class.getName());
+        Logger logger = LoggerFactory.getLogger(getClass().getName());
         try {
             ExtractionExperiment experiment = new ExtractionExperiment(extractor, new File(urlScores.getFile()));
-            logger.info("Running extractor " + extractor.getClass().getSimpleName());
+            logger.info("Running extractor " + extractor.getClass().getSimpleName() + " for " + xmlPath);
             logger.info(experiment.getCaseName() + ", normalization: " + experiment.isNormalize());
             EvaluationResult result = experiment.perform();
             return new ExtractorOutput(experiment.getCaseName(),
@@ -93,21 +93,11 @@ public class TestUseCaseExperiment {
         }
         System.out.println(builder.toString());
     }
-
-    @Test
-    public void testUseCaseModelsStanford() {
-        VocabularyExtractor[] extractors = {
-            new StepwiseCascadedExtractor(net.tmine.stanfordnlp.processing.NamedEntityFinder.getInstance(), 
-                    net.tmine.stanfordnlp.entities.SentenceFactory.getInstance()),
-            new SimpleCascadedExtractor(net.tmine.stanfordnlp.processing.NamedEntityFinder.getInstance(), 
-                    net.tmine.stanfordnlp.entities.SentenceFactory.getInstance()),
-            new SimulatedAutoExtraction()
-        };
-        runUseCaseExtractionExperiment(extractors);
-    }
-    
+/*
     @Test
     public void testUseCaseModelsOpenNLP() {
+        Logger logger = LoggerFactory.getLogger(getClass().getName());
+        logger.info("Testing performance using default taggers trained with OpenNLP");
         net.tmine.opennlp.processing.NamedEntityFinder finder = new net.tmine.opennlp.processing.NamedEntityFinder();
         net.tmine.opennlp.entities.SentenceFactory sentFactory = net.tmine.opennlp.entities.SentenceFactory.getInstance();
         net.tmine.opennlp.processing.MaxEntropyPOSTagger tagger = net.tmine.opennlp.processing.MaxEntropyPOSTagger.getInstance();
@@ -116,10 +106,13 @@ public class TestUseCaseExperiment {
         SimpleCascadedExtractor simple = new SimpleCascadedExtractor(finder, sentFactory);
         simple.setTagger(tagger);
         runUseCaseExtractionExperiment(new VocabularyExtractor[]{stepwise, simple});
-    }   
-    
+        System.gc();
+    }
+
     @Test
     public void testUseCaseModelsWithCustomTagger() {
+        Logger logger = LoggerFactory.getLogger(getClass().getName());
+        logger.info("Testing performance using custom taggers trained with OpenNLP");
         net.tmine.opennlp.processing.NamedEntityFinder finder = new net.tmine.opennlp.processing.NamedEntityFinder();
         net.tmine.opennlp.entities.SentenceFactory sentFactory = net.tmine.opennlp.entities.SentenceFactory.getInstance();
         StepwiseCascadedExtractor stepwise = new StepwiseCascadedExtractor(finder, sentFactory);
@@ -127,6 +120,23 @@ public class TestUseCaseExperiment {
         SimpleCascadedExtractor simple = new SimpleCascadedExtractor(finder, sentFactory);
         simple.setTagger(Taggers.getCustomMaxentTagger());
         runUseCaseExtractionExperiment(new VocabularyExtractor[]{stepwise, simple});
-    }   
+        System.gc();
+    }
+*/
+
+    @Test
+    public void testUseCaseModelsStanford() {
+        Logger logger = LoggerFactory.getLogger(getClass().getName());
+        logger.info("Testing performance using Stanford CoreNLP tools");
+        VocabularyExtractor[] extractors = {
+            new StepwiseCascadedExtractor(net.tmine.stanfordnlp.processing.NamedEntityFinder.getInstance(),
+            net.tmine.stanfordnlp.entities.SentenceFactory.getInstance()),
+            new SimpleCascadedExtractor(net.tmine.stanfordnlp.processing.NamedEntityFinder.getInstance(),
+            net.tmine.stanfordnlp.entities.SentenceFactory.getInstance()),
+            new SimulatedAutoExtraction()
+        };
+        runUseCaseExtractionExperiment(extractors);
+        System.gc();
+    }
 
 }
