@@ -193,4 +193,9 @@ public class SimulatedAutoExtraction extends AbstractVocabularyExtractor {
         }
     }
 
+    @Override
+    public boolean useNormalization() {
+        return this.normalize;
+    }
+
 }

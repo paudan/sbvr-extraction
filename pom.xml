@@ -115,15 +115,6 @@
                         <configuration>
                             <target>
                                 <delete dir="${wordnet.path}/WordNet-3.0"/>
-                                <move file="${wordnet.path}/data.adj" tofile="${wordnet.path}/adj.dat" />
-                                <move file="${wordnet.path}/data.adv" tofile="${wordnet.path}/adv.dat" />
-                                <move file="${wordnet.path}/data.noun" tofile="${wordnet.path}/noun.dat" />
-                                <move file="${wordnet.path}/data.verb" tofile="${wordnet.path}/verb.dat" />
-                                <move file="${wordnet.path}/index.adj" tofile="${wordnet.path}/adj.idx" />
-                                <move file="${wordnet.path}/index.adv" tofile="${wordnet.path}/adv.idx" />
-                                <move file="${wordnet.path}/index.noun" tofile="${wordnet.path}/noun.idx" />
-                                <move file="${wordnet.path}/index.sense" tofile="${wordnet.path}/sense.idx" />
-                                <move file="${wordnet.path}/index.verb" tofile="${wordnet.path}/verb.idx" />
                             </target>
                         </configuration>
                         <goals>

@@ -15,8 +15,11 @@
  */
 package org.ktu.isd.tagging;
 
+import edu.stanford.nlp.tagger.maxent.MaxentTagger;
+import java.net.URL;
 import net.tmine.opennlp.processing.CustomOpenNLPTagger;
 import net.tmine.processing.POSTagger;
+import net.tmine.stanfordnlp.processing.StanfordPOSTagger;
 
 
 public class Taggers {
@@ -27,6 +30,12 @@ public class Taggers {
     
     public static POSTagger getCustomPerceptronTagger() {
         return new CustomOpenNLPTagger("models/en-custom-perceptron.bin");
+    }
+    
+    public static POSTagger getCustomStanfordTagger() {
+        String path = "models/stanford-maxent-model";
+        URL modelFile = Taggers.class.getClassLoader().getResource(path);
+        return new StanfordPOSTagger(new MaxentTagger(modelFile.getPath()));
     }
     
 }

@@ -28,6 +28,7 @@ import java.util.logging.Logger;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 import net.tmine.entities.InitializationException;
+import net.tmine.processing.POSTagger;
 import net.tmine.stanfordnlp.entities.SentenceFactory;
 import net.tmine.stanfordnlp.processing.NamedEntityFinder;
 import static org.junit.Assert.assertEquals;
@@ -37,6 +38,7 @@ import org.ktu.isd.extraction.SBVRExpressionModel;
 import org.ktu.isd.extraction.SBVRExpressionModel.ExpressionType;
 import org.ktu.isd.extraction.StepwiseCascadedExtractor;
 import org.ktu.isd.extraction.VocabularyExtractor.ConceptType;
+import org.ktu.isd.tagging.Taggers;
 
 public class SBVRExtractionTest {
 
@@ -382,6 +384,65 @@ public class SBVRExtractionTest {
         extractor.extract();
         Collection<SBVRExpressionModel> general = extractor.getExtractedGeneralConcepts();
         assertEquals(1, general.size());
+    }
+    
+    @Test
+    public void extractVerbConcept() throws InitializationException {
+        Map<String, ConceptType> rumblings = Collections.unmodifiableMap(Stream.of(new SimpleEntry<>("customer buy on-sale tickets", ConceptType.VERB_CONCEPT))
+                .collect(Collectors.toMap((e) -> e.getKey(), (e) -> e.getValue())));
+        StepwiseCascadedExtractor extractor = new StepwiseCascadedExtractor(rumblings,
+                NamedEntityFinder.getInstance(), SentenceFactory.getInstance());
+        // extractor.setUseNormalization(true);
+        extractor.extract();
+        Collection<SBVRExpressionModel> general = extractor.getExtractedGeneralConcepts();
+        assertEquals(2, general.size());
+        Collection<SBVRExpressionModel> verbs = extractor.getExtractedVerbConcepts();
+        assertEquals(1, verbs.size());
+        System.out.println(general);
+        System.out.println(verbs);
+        assertEquals("customer buys one or more on-sale ticket", verbs.toArray()[0].toString());
+    }
+    
+    @Test
+    public void testExtractCase() throws InitializationException {
+        Map<String, ConceptType> rumblingsMap = Collections.unmodifiableMap(Stream.of(
+            new SimpleEntry<>("credit card validation system", ConceptType.GENERAL_CONCEPT),
+            new SimpleEntry<>("customer", ConceptType.GENERAL_CONCEPT),
+            new SimpleEntry<>("customer winning ticket entered", ConceptType.VERB_CONCEPT),
+            new SimpleEntry<>("customer buy team merchandise", ConceptType.VERB_CONCEPT),
+            new SimpleEntry<>("customer buy on-sale tickets", ConceptType.VERB_CONCEPT),
+            new SimpleEntry<>("customer purchase using hockey team card", ConceptType.VERB_CONCEPT),
+            new SimpleEntry<>("customer purchase with credit card", ConceptType.VERB_CONCEPT),
+            new SimpleEntry<>("customer perform transaction", ConceptType.VERB_CONCEPT),
+            new SimpleEntry<>("winning ticket was entered", ConceptType.VERB_CONCEPT),
+            new SimpleEntry<>("credit card validation system purchase with credit card", ConceptType.VERB_CONCEPT),
+            new SimpleEntry<>("It is possible that customer winning ticket entered if winning ticket was entered and customer buy team merchandise", ConceptType.BUSINESS_RULE),
+            new SimpleEntry<>("It is obligatory that customer perform transaction if customer buy tickets", ConceptType.BUSINESS_RULE),
+            new SimpleEntry<>("It is obligatory that customer perform transaction if customer buy on-sale tickets", ConceptType.BUSINESS_RULE),
+            new SimpleEntry<>("It is obligatory that customer perform transaction if customer buy team merchandise", ConceptType.BUSINESS_RULE))
+            .collect(Collectors.toMap((e) -> e.getKey(), (e) -> e.getValue())));
+        System.out.println("Extraction using Stanford POS tagger");
+        StepwiseCascadedExtractor extractor = new StepwiseCascadedExtractor(rumblingsMap, NamedEntityFinder.getInstance(), SentenceFactory.getInstance());
+        extractor.setReplaceSynonyms(false);
+        extractor.setUseNormalization(true);
+        //extractor.extract();
+        Collection<SBVRExpressionModel> generalConcepts = extractor.getExtractedGeneralConcepts();
+        Collection<SBVRExpressionModel> verbConcepts = extractor.getExtractedVerbConcepts();
+        Collection<SBVRExpressionModel> businessRules = extractor.getExtractedBusinessRules();
+        System.out.println(generalConcepts);
+        System.out.println(verbConcepts);
+        System.out.println(businessRules);
+        
+        System.out.println("Extraction using custom POS tagger");
+        POSTagger tagger = Taggers.getCustomStanfordTagger();
+        extractor.setTagger(tagger);
+        extractor.extract();
+        generalConcepts = extractor.getExtractedGeneralConcepts();
+        verbConcepts = extractor.getExtractedVerbConcepts();
+        businessRules = extractor.getExtractedBusinessRules();
+        System.out.println(generalConcepts);
+        System.out.println(verbConcepts);
+        System.out.println(businessRules);
     }
 
 }

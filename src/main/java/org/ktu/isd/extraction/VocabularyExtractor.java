@@ -38,6 +38,8 @@ public interface VocabularyExtractor {
     Collection<SBVRExpressionModel> getExtractedVerbConcepts();
     
     void setUseNormalization(boolean normalize);
+    
+    boolean useNormalization();
 
     Map<String, ConceptType> getRumblings();
 

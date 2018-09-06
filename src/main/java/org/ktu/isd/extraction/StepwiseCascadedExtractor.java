@@ -229,13 +229,14 @@ public class StepwiseCascadedExtractor extends AbstractVocabularyExtractor {
     private void initOverrides() {
         overrides = new DualHashBidiMap<>();
         // These phrases may be recognized as verb concepts, thus they are ignored 
-        overrides.put("It is obligatory", "RULE_TAG1");
-        overrides.put("It is possible", "RULE_TAG2");
-        overrides.put("It is permitted", "RULE_TAG3");
-        overrides.put("It is required", "RULE_TAG4");
+        // "that" can be tagged differently by original and custom taggers!
+        overrides.put("It is obligatory that", "RULE_TAG1");
+        overrides.put("It is possible that", "RULE_TAG2");
+        overrides.put("It is permitted that", "RULE_TAG3");
+        overrides.put("It is required that", "RULE_TAG4");
         overrides.put("if", "IF_TAG");
         // Original pattern is overriden to conform to these exclusions
-        PATTERN_BR = String.format("([RULE_TAG1]|[RULE_TAG2]|[RULE_TAG3]|[RULE_TAG4]){1}[WDT](%s)([IF_TAG](%s))*([CC]%s)*",
+        PATTERN_BR = String.format("([RULE_TAG1]|[RULE_TAG2]|[RULE_TAG3]|[RULE_TAG4]){1}(%s)([IF_TAG](%s))*([CC]%s)*",
                 PATTERN_COMBINED_VC, PATTERN_COMBINED_VC, PATTERN_COMBINED_VC);
     }
 
@@ -533,7 +534,7 @@ public class StepwiseCascadedExtractor extends AbstractVocabularyExtractor {
         for (SBVRExpressionModel cand : checked) {
             Set<String> synonyms;
             try {
-                synonyms = new Word(cand.getExpressionElement(0), "NN").getHypernyms();
+                synonyms = sentFactory.getWordFactory().createWord(cand.getExpressionElement(0), "NN").getHypernyms();
             } catch (Exception ex) {
                 synonyms = new HashSet<>();
             }
@@ -578,7 +579,7 @@ public class StepwiseCascadedExtractor extends AbstractVocabularyExtractor {
                     int numSenses = 1;
                     // We must also check that synonym has not any homonymous forms itself!
                     try {
-                        numSenses = new Word(symWord).getAllSynonyms().size();
+                        numSenses = sentFactory.getWordFactory().createWord(symWord).getAllSynonyms().size();
                     } catch (Exception ex) {
                     }
                     // Check for possible homonyms in synonyms

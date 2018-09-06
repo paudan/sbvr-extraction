@@ -90,6 +90,11 @@ abstract public class AbstractVocabularyExtractor implements VocabularyExtractor
     }
     
     @Override
+    public boolean useNormalization() {
+        return this.normalize;
+    }
+    
+    @Override
     public Map<String, ConceptType> getRumblings() {
         return rumblings;
     }
