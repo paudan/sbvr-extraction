@@ -70,7 +70,7 @@ public class TestUseCaseExperiment {
     }
 
     public Set<Path> getFileList(String dir) {
-        Path path = Paths.get("..", "..", "dataset", dir);
+        Path path = Paths.get("..", "..", "extraction-dataset", dir);
         Set<Path> experimentFiles = new HashSet<>();
         if (Files.isDirectory(path))
             try (DirectoryStream<Path> stream = Files.newDirectoryStream(path, "*.xml")) {
@@ -89,17 +89,6 @@ public class TestUseCaseExperiment {
             List<ExtractorOutput> extractorResults = new ArrayList<>();
             for (Path filePath: experimentFiles)
                 extractorResults.add(runExperimentWithModel(filePath, extractor, path));
-/*            extractorResults.add(runExperimentWithModel("vepsem.xml", extractor, path));
-            extractorResults.add(runExperimentWithModel("elements_of_style_1.xml", extractor, path));
-            extractorResults.add(runExperimentWithModel("uml_bible_1.xml", extractor, path));
-            extractorResults.add(runExperimentWithModel("uml_bible_2.xml", extractor, path));
-            extractorResults.add(runExperimentWithModel("uml_specification.xml", extractor, path));
-            extractorResults.add(runExperimentWithModel("uml_specification_2.xml", extractor, path));
-            extractorResults.add(runExperimentWithModel("uml_distilled.xml", extractor, path));
-            extractorResults.add(runExperimentWithModel("learning_uml.xml", extractor, path));
-            extractorResults.add(runExperimentWithModel("el-attar-2007.xml", extractor, path));
-            extractorResults.add(runExperimentWithModel("el-attar-2009.xml", extractor, path));
-            extractorResults.add(runExperimentWithModel("el-attar-2012.xml", extractor, path));*/
             fullResults.put(extractor.getClass().getSimpleName(), extractorResults);
         }
         StringBuilder builder = new StringBuilder();
