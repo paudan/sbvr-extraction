@@ -16,15 +16,15 @@
 package org.ktu.isd.testing;
 
 import java.nio.file.Path;
-import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
+import java.util.TreeMap;
 import org.junit.Test;
 import org.ktu.isd.extraction.TestUseCaseExperiment;
 
 public class TestCaseFileParser {
 
-    private Map<String, Integer[]> stats = new HashMap<>();
+    private Map<String, Integer[]> stats = new TreeMap<>();
 
     @Test
     public void testStatisticsCollection() {
