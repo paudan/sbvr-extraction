@@ -21,8 +21,10 @@ import java.util.AbstractMap.SimpleEntry;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.TreeSet;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
@@ -34,9 +36,7 @@ import net.tmine.stanfordnlp.processing.NamedEntityFinder;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import org.junit.Test;
-import org.ktu.isd.extraction.SBVRExpressionModel;
 import org.ktu.isd.extraction.SBVRExpressionModel.ExpressionType;
-import org.ktu.isd.extraction.StepwiseCascadedExtractor;
 import org.ktu.isd.extraction.VocabularyExtractor.ConceptType;
 import org.ktu.isd.tagging.Taggers;
 
@@ -345,10 +345,68 @@ public class SBVRExtractionTest {
         StepwiseCascadedExtractor extractor = new StepwiseCascadedExtractor(rumblings,
                 NamedEntityFinder.getInstance(), SentenceFactory.getInstance());
         extractor.extract();
-        Collection<SBVRExpressionModel> general = extractor.getExtractedVerbConcepts();
-        assertEquals(1, general.size());
+        Collection<SBVRExpressionModel> general = extractor.getExtractedGeneralConcepts();
+        assertEquals(2, general.size());
+        Collection<SBVRExpressionModel> individual = extractor.getExtractedIndividualConcepts();
+        assertEquals(1, individual.size());
+        Collection<SBVRExpressionModel> verbs = extractor.getExtractedVerbConcepts();
+        assertEquals(1, verbs.size());
     }
 
+    @Test
+    public void testTrinaryConcepts2() throws InitializationException {
+        Map<String, ConceptType> rumblings = Collections.unmodifiableMap(Stream.of(
+                new SimpleEntry<>("User preset Telescope to Catalogue Object", ConceptType.VERB_CONCEPT))
+                .collect(Collectors.toMap((e) -> e.getKey(), (e) -> e.getValue())));
+        StepwiseCascadedExtractor extractor = new StepwiseCascadedExtractor(rumblings,
+                NamedEntityFinder.getInstance(), SentenceFactory.getInstance());
+        extractor.extract();
+        Collection<SBVRExpressionModel> general = extractor.getExtractedGeneralConcepts();
+        assertEquals(1, general.size());
+        assertEquals("User", general.iterator().next().toString());
+        Collection<SBVRExpressionModel> individual = extractor.getExtractedIndividualConcepts();
+        assertEquals(1, individual.size());
+        assertEquals("Catalogue Object", individual.iterator().next().toString());
+        Collection<SBVRExpressionModel> verbs = extractor.getExtractedVerbConcepts();
+        assertEquals(0, verbs.size());  /// "preset" is tagged as adjective!
+    }
+
+    @Test
+    public void testTrinaryConcepts3() throws InitializationException {
+        Map<String, ConceptType> rumblings = Collections.unmodifiableMap(Stream.of(
+                new SimpleEntry<>("User preset telescope to catalogue object", ConceptType.VERB_CONCEPT))
+                .collect(Collectors.toMap((e) -> e.getKey(), (e) -> e.getValue())));
+        StepwiseCascadedExtractor extractor = new StepwiseCascadedExtractor(rumblings,
+                NamedEntityFinder.getInstance(), SentenceFactory.getInstance());
+        extractor.extract();
+        Collection<SBVRExpressionModel> general = extractor.getExtractedGeneralConcepts();
+        assertEquals(2, general.size());
+        TreeSet<String> genStr = general.stream().map(SBVRExpressionModel::toString).collect(Collectors.toCollection(TreeSet::new));
+        Iterator iter = genStr.iterator();
+        assertEquals("User", iter.next());
+        assertEquals("catalogue object", iter.next());
+        Collection<SBVRExpressionModel> individual = extractor.getExtractedIndividualConcepts();
+        assertEquals(0, individual.size());
+        Collection<SBVRExpressionModel> verbs = extractor.getExtractedVerbConcepts();
+        assertEquals(0, verbs.size());  /// "preset" is tagged as adjective!
+    }
+    
+    @Test
+    public void testTrinaryConcepts4() throws InitializationException {
+        Map<String, ConceptType> rumblings = Collections.unmodifiableMap(Stream.of(
+                new SimpleEntry<>("User presets telescope to catalogue object", ConceptType.VERB_CONCEPT))
+                .collect(Collectors.toMap((e) -> e.getKey(), (e) -> e.getValue())));
+        StepwiseCascadedExtractor extractor = new StepwiseCascadedExtractor(rumblings,
+                NamedEntityFinder.getInstance(), SentenceFactory.getInstance());
+        extractor.extract();
+        Collection<SBVRExpressionModel> general = extractor.getExtractedGeneralConcepts();
+        assertEquals(3, general.size());
+        Collection<SBVRExpressionModel> individual = extractor.getExtractedIndividualConcepts();
+        assertEquals(0, individual.size());
+        Collection<SBVRExpressionModel> verbs = extractor.getExtractedVerbConcepts();
+        assertEquals(1, verbs.size());
+    }
+    
     @Test
     public void testNormalizeGeneralConcept() throws InitializationException {
         Map<String, ConceptType> rumblings = Collections.unmodifiableMap(Stream.of(new SimpleEntry<>("rental managers", ConceptType.GENERAL_CONCEPT))
