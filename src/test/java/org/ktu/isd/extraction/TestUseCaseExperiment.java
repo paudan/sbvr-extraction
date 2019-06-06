@@ -52,8 +52,6 @@ public class TestUseCaseExperiment {
     }
 
     private ExtractorOutput runExperimentWithModel(Path xmlPath, VocabularyExtractor extractor, String path) {
-        /*ClassLoader classLoader = TestUseCaseExperiment.class.getClassLoader();
-        URL urlScores = classLoader.getResource(path + xmlPath);*/
         Logger logger = LoggerFactory.getLogger(getClass().getName());
         try {
             ExtractionExperiment experiment = new ExtractionExperiment(extractor, new File(xmlPath.toUri()));
@@ -139,7 +137,7 @@ public class TestUseCaseExperiment {
     @Test
     public void testUseCaseModelsStanford() {
         Logger logger = LoggerFactory.getLogger(getClass().getName());
-        logger.info("Testing performance using Stanford CoreNLP tools");
+        logger.info("Testing performance using default taggers trained using Stanford CoreNLP");
         net.tmine.stanfordnlp.processing.NamedEntityFinder finder = net.tmine.stanfordnlp.processing.NamedEntityFinder.getInstance();
         net.tmine.stanfordnlp.entities.SentenceFactory sentFactory = net.tmine.stanfordnlp.entities.SentenceFactory.getInstance();
         POSTagger tagger = MaxEntropyPOSTagger.getInstance();
@@ -155,7 +153,7 @@ public class TestUseCaseExperiment {
     @Test
     public void testUseCaseModelsStanfordCustom() {
         Logger logger = LoggerFactory.getLogger(getClass().getName());
-        logger.info("Testing performance using Stanford CoreNLP tools");
+        logger.info("Testing performance using custom-trained Stanford NLP tagger");
         net.tmine.stanfordnlp.processing.NamedEntityFinder finder = net.tmine.stanfordnlp.processing.NamedEntityFinder.getInstance();
         net.tmine.stanfordnlp.entities.SentenceFactory sentFactory = net.tmine.stanfordnlp.entities.SentenceFactory.getInstance();
         POSTagger tagger = Taggers.getCustomStanfordTagger();
