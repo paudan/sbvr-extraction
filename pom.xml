@@ -115,6 +115,16 @@
                         <configuration>
                             <target>
                                 <delete dir="${wordnet.path}/WordNet-3.0"/>
+                                <!-- It seems to be required that files should be renamed as follows on some platforms -->
+                                <copy file="${wordnet.path}/data.adj" tofile="${wordnet.path}/adj.dat" />
+                                <copy file="${wordnet.path}/data.adv" tofile="${wordnet.path}/adv.dat" />
+                                <copy file="${wordnet.path}/data.noun" tofile="${wordnet.path}/noun.dat" />
+                                <copy file="${wordnet.path}/data.verb" tofile="${wordnet.path}/verb.dat" />
+                                <copy file="${wordnet.path}/index.adj" tofile="${wordnet.path}/adj.idx" />
+                                <copy file="${wordnet.path}/index.adv" tofile="${wordnet.path}/adv.idx" />
+                                <copy file="${wordnet.path}/index.noun" tofile="${wordnet.path}/noun.idx" />
+                                <copy file="${wordnet.path}/index.sense" tofile="${wordnet.path}/sense.idx" />
+                                <copy file="${wordnet.path}/index.verb" tofile="${wordnet.path}/verb.idx" />
                             </target>
                         </configuration>
                         <goals>
