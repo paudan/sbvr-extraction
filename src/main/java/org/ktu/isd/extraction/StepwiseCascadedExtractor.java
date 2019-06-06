@@ -342,6 +342,7 @@ public class StepwiseCascadedExtractor extends AbstractVocabularyExtractor {
                     generalConcepts.remove(replacement.getKey());
                     individualConcepts.remove(replacement.getKey());
                 }
+            tagWithRecognizedGC(cand);
         }
     }
 
@@ -658,7 +659,7 @@ public class StepwiseCascadedExtractor extends AbstractVocabularyExtractor {
         // Preserve original tokens to identify quantifiers
         String origConceptStr = String.join(" ", nouns).trim();
         origConceptStr = origConceptStr.replaceAll(" '", "'");
-        if (normalize) {
+        if (normalize && nouns.size() > 0) {
             // Normalize last noun
             String last = nouns.get(nouns.size() - 1);
             nouns.set(nouns.size() - 1, sentFactory.getWordFactory().createWord(last).getLemma());
@@ -782,6 +783,7 @@ public class StepwiseCascadedExtractor extends AbstractVocabularyExtractor {
                     }
                 }
                 boolean verbFound = false;
+                startIndex = 1;   // Skip first word
                 while (!verbFound && startIndex < newPos.size())
                     if (VerbWord.isVerb(newToken.get(startIndex))) {
                         // Set tag for this word as VB
