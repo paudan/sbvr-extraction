@@ -147,13 +147,14 @@ public class ExtractionExperiment {
                         && (types[i].equals(ConceptType.GENERAL_CONCEPT) || types[i].equals(ConceptType.INDIVIDUAL_CONCEPT)))
                     continue;
                 extractedStrings.clear();
+                // Use lower case normalization for case-insensitive evaluation
                 for (Entry<SBVRExpressionModel, ConceptType> sbvr : extractedByConcept.entrySet())
                     if (sbvr.getValue().equals(types[i]))
-                        extractedStrings.add(sbvr.getKey().toString());
+                        extractedStrings.add(sbvr.getKey().toString().toLowerCase());
                 actualStrings.clear();
                 for (Entry<String, ConceptType> sbvr : actual.entrySet())
                     if (sbvr.getValue().equals(types[i]))
-                        actualStrings.add(sbvr.getKey());
+                        actualStrings.add(sbvr.getKey().toLowerCase());
                 result = calculateMetrics(result, extractedStrings, actualStrings, i, rumbling);
             }
         }
