@@ -16,12 +16,18 @@
 package org.ktu.isd.extraction;
 
 import java.io.File;
-import java.net.URL;
+import java.io.IOException;
+import java.nio.file.DirectoryStream;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.Set;
 import net.tmine.entities.InitializationException;
 import net.tmine.processing.POSTagger;
 import net.tmine.stanfordnlp.processing.MaxEntropyPOSTagger;
@@ -45,12 +51,12 @@ public class TestUseCaseExperiment {
         }
     }
 
-    private ExtractorOutput runExperimentWithModel(String xmlPath, VocabularyExtractor extractor, String path) {
-        ClassLoader classLoader = TestUseCaseExperiment.class.getClassLoader();
-        URL urlScores = classLoader.getResource(path + xmlPath);
+    private ExtractorOutput runExperimentWithModel(Path xmlPath, VocabularyExtractor extractor, String path) {
+        /*ClassLoader classLoader = TestUseCaseExperiment.class.getClassLoader();
+        URL urlScores = classLoader.getResource(path + xmlPath);*/
         Logger logger = LoggerFactory.getLogger(getClass().getName());
         try {
-            ExtractionExperiment experiment = new ExtractionExperiment(extractor, new File(urlScores.getFile()));
+            ExtractionExperiment experiment = new ExtractionExperiment(extractor, new File(xmlPath.toUri()));
             logger.info("Running extractor " + extractor.getClass().getSimpleName() + " for " + xmlPath);
             logger.info(experiment.getCaseName() + ", normalization: " + experiment.isNormalize());
             EvaluationResult result = experiment.perform();
@@ -63,11 +69,27 @@ public class TestUseCaseExperiment {
         return null;
     }
 
+    public Set<Path> getFileList(String dir) {
+        Path path = Paths.get("..", "..", "dataset", dir);
+        Set<Path> experimentFiles = new HashSet<>();
+        if (Files.isDirectory(path))
+            try (DirectoryStream<Path> stream = Files.newDirectoryStream(path, "*.xml")) {
+                for (Path p : stream)                 
+                    experimentFiles.add(p);
+            } catch (IOException e) {
+                LoggerFactory.getLogger(getClass().getName()).info(e.getMessage());
+            }
+        return experimentFiles;
+    }
+
     private void runUseCaseExtractionExperiment(VocabularyExtractor[] extractors, String path) {
         Map<String, List<ExtractorOutput>> fullResults = new HashMap<>();
+        Set<Path> experimentFiles = getFileList(path);
         for (VocabularyExtractor extractor : extractors) {
             List<ExtractorOutput> extractorResults = new ArrayList<>();
-            extractorResults.add(runExperimentWithModel("vepsem.xml", extractor, path));
+            for (Path filePath: experimentFiles)
+                extractorResults.add(runExperimentWithModel(filePath, extractor, path));
+/*            extractorResults.add(runExperimentWithModel("vepsem.xml", extractor, path));
             extractorResults.add(runExperimentWithModel("elements_of_style_1.xml", extractor, path));
             extractorResults.add(runExperimentWithModel("uml_bible_1.xml", extractor, path));
             extractorResults.add(runExperimentWithModel("uml_bible_2.xml", extractor, path));
@@ -77,7 +99,7 @@ public class TestUseCaseExperiment {
             extractorResults.add(runExperimentWithModel("learning_uml.xml", extractor, path));
             extractorResults.add(runExperimentWithModel("el-attar-2007.xml", extractor, path));
             extractorResults.add(runExperimentWithModel("el-attar-2009.xml", extractor, path));
-            extractorResults.add(runExperimentWithModel("el-attar-2012.xml", extractor, path));
+            extractorResults.add(runExperimentWithModel("el-attar-2012.xml", extractor, path));*/
             fullResults.put(extractor.getClass().getSimpleName(), extractorResults);
         }
         StringBuilder builder = new StringBuilder();
@@ -107,7 +129,7 @@ public class TestUseCaseExperiment {
         stepwise.setTagger(tagger);
         SimpleCascadedExtractor simple = new SimpleCascadedExtractor(finder, sentFactory);
         simple.setTagger(tagger);
-        runUseCaseExtractionExperiment(new VocabularyExtractor[]{stepwise, simple}, "usecase/normalized/");
+        runUseCaseExtractionExperiment(new VocabularyExtractor[]{stepwise, simple}, "usecase/normalized");
         System.gc();
     }
 
@@ -121,9 +143,10 @@ public class TestUseCaseExperiment {
         stepwise.setTagger(Taggers.getCustomMaxentTagger());
         SimpleCascadedExtractor simple = new SimpleCascadedExtractor(finder, sentFactory);
         simple.setTagger(Taggers.getCustomMaxentTagger());
-        runUseCaseExtractionExperiment(new VocabularyExtractor[]{stepwise, simple}, "usecase/normalized/");
+        runUseCaseExtractionExperiment(new VocabularyExtractor[]{stepwise, simple}, "usecase/normalized");
         System.gc();
     }
+
     @Test
     public void testUseCaseModelsStanford() {
         Logger logger = LoggerFactory.getLogger(getClass().getName());
@@ -136,10 +159,10 @@ public class TestUseCaseExperiment {
         SimpleCascadedExtractor simple = new SimpleCascadedExtractor(finder, sentFactory);
         simple.setTagger(tagger);
         VocabularyExtractor[] extractors = {stepwise, simple, new SimulatedAutoExtraction()};
-        runUseCaseExtractionExperiment(extractors, "usecase/normalized/");
+        runUseCaseExtractionExperiment(extractors, "usecase/normalized");
         System.gc();
     }
-    
+
     @Test
     public void testUseCaseModelsStanfordCustom() {
         Logger logger = LoggerFactory.getLogger(getClass().getName());
@@ -152,14 +175,14 @@ public class TestUseCaseExperiment {
         SimpleCascadedExtractor simple = new SimpleCascadedExtractor(finder, sentFactory);
         simple.setTagger(tagger);
         VocabularyExtractor[] extractors = {stepwise, simple};
-        runUseCaseExtractionExperiment(extractors, "usecase/normalized/");
+        runUseCaseExtractionExperiment(extractors, "usecase/normalized");
         System.gc();
     }
-    
+
     @Test
     public void testUseCaseSimulatedAutoExtraction() {
         VocabularyExtractor[] extractors = {new SimulatedAutoExtraction()};
-        runUseCaseExtractionExperiment(extractors, "usecase/non-normalized/");
+        runUseCaseExtractionExperiment(extractors, "usecase/non-normalized");
         System.gc();
     }
 
