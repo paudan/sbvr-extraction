@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <experiment_case>
-    <case_name>UML Specification Model 1</case_name>
+    <case_name>UML Specification Model 2</case_name>
     <normalize>false</normalize>
     <source>
         <rumbling expected="gc">Transaction Use Cases</rumbling>
