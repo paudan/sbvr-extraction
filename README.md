@@ -1,0 +1,1 @@
+Experimental code for the paper "Natural Language Processing-Enhanced Extraction of SBVR Business Vocabularies and Business Rules from UML Use Case Diagrams". Can be applied to extract of business vocabulary and business rules from text phrases in various visual models
